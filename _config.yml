@@ -13,7 +13,7 @@ disqus:
 
 url: https://sancheslz.github.io
 
-permalink: /:slug/:title
+permalink: /:slug
 
 # Build settings
 markdown: kramdown

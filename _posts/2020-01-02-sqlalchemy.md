@@ -2,7 +2,7 @@
 layout: post
 title:  "Introdução"
 date:   2020-01-02 23:06:28 -0300
-slug: "sql-alchemy-essencial"
+slug: "sql-alchemy-essencial introducao"
 tags: "books"
 category: "SQL Alchemy Essencial"
 comments: true

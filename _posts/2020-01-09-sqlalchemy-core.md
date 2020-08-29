@@ -2,7 +2,7 @@
 layout: post
 date:  2020-01-09 00:00:00 -0300
 title:  "Core: Criando Tabelas"
-slug: "sql-alchemy-essencial"
+slug: "sql-alchemy-essencial core criando tabelas"
 tag: books
 category:  "SQL Alchemy Essencial"
 comments: true

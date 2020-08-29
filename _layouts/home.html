@@ -12,8 +12,8 @@ layout: default
   {%- if site.posts.size > 0 -%}
     <h2 class="post-list-heading">Últimos {{ page.list_title | default: "Posts" }}</h2>
     <ul class="post-list">
-      {% assign posts = site.posts | limit:5 %}
-      {%- for post in posts -%}
+      {% assign posts = site.posts%}
+      {%- for post in posts | limit:5 -%}
       <li>
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         <span class="post-meta">{{ post.date | date: date_format }}</span>

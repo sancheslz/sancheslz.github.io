@@ -2,7 +2,7 @@
 layout: post
 date:  2020-01-30 00:00:00 -0300
 title: "Core: Refletindo Tabelas"
-slug: "sql-alchemy-essencial"
+slug: "sql-alchemy-essencial core reflecting"
 tag: books
 category:  "SQL Alchemy Essencial"
 comments: true

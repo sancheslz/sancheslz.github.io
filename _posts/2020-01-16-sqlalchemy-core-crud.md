@@ -2,7 +2,7 @@
 layout: post
 date:  2020-01-16 00:00:00 -0300
 title:  "Core: Fazendo o CRUD"
-slug: "sql-alchemy-essencial"
+slug: "sql-alchemy-essencial core fazendo o crud"
 tag: books
 category:  "SQL Alchemy Essencial"
 comments: true
