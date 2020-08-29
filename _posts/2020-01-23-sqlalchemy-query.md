@@ -48,7 +48,7 @@ JOIN cookies ON cookies.cookie_id = line_items.cookie_id
 WHERE users.username = :username_1
 ```
 
-Para fazer o outerjoin, basta utilizar o método `outerjoin()`, passando a tabela em que a consulta deverá ser realizada:
+Para fazer o *outerjoin*, basta utilizar o método `outerjoin()`, passando a tabela em que a consulta deverá ser realizada:
 
 ```python
 from sqlalchemy import func
@@ -67,7 +67,7 @@ for row in result:
 
 ### Usando Alias
 
-Ao usar joins, frequentemente é necessário fazer referência a uma tabela mais de uma vez. No SQL, é possível fazer isso através do `alias` em uma consulta.
+Ao usar *joins*, frequentemente é necessário fazer referência a uma tabela mais de uma vez. No SQL, é possível fazer isso através do `alias` em uma consulta.
 
 Veja um exemplo:
 
@@ -79,7 +79,7 @@ employee_table = Table(
     Column('name', String(255)))
 ```
 
-Neste caso, temos uma tabela de empregado em que o gestor (manager), é também um empregado. Para consultar os funcionários que são gerenciados por "Fred", por exemplo, o comando SQL necessário seria:
+Neste caso, temos uma tabela de empregado em que o gestor (*manager*), é também um empregado. Para consultar os funcionários que são gerenciados por "Fred", por exemplo, o comando SQL necessário seria:
 
 ```sql
 SELECT employee.name

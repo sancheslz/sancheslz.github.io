@@ -110,7 +110,7 @@ Note que:
 - `nullable=False` determina que não pode haver valor nulo para o campo, isto é, este campo é obrigatório
 - `unique=True` pode haver apenas um valor como o informado
 - `default=datetime.now` caso um horário não seja informado, será usado o horário atual.
-- `onupdate=datetime.now` o valor desta coluna será resetado toda vez que parte deste registro for alterado
+- `onupdate=datetime.now` o valor desta coluna será reiniciado toda vez que parte deste registro for alterado
 
 Observe que não está sendo feita a chamada da função `datetime.now()`, pois isso definiria como padrão o horário de criação da tabela. Sem invocar a função, a mesma será executada a cada novo registro.
 

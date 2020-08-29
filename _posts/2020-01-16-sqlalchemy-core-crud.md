@@ -305,7 +305,7 @@ print(record.inventory_count) # >>> 4
 
 ### Filtros
 
-Os filtros são feito através do método `where()`, assim como no SQL. Um `where` tipico possui uma coluna, um operador, e um valor ou coluna. Além disso, é possível encadenar múltiplos `where()` e eles se comportarão como um `AND` em SQL.
+Os filtros são feito através do método `where()`, assim como no SQL. Um `where` tipico possui uma coluna, um operador, e um valor ou coluna. Além disso, é possível encadear múltiplos `where()` e eles se comportarão como um `AND` em SQL.
 
 ```python
 s = select([cookies]).where(cookies.c.cookie_name == 'chocolate chip')
