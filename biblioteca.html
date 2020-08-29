@@ -1,0 +1,28 @@
+--- 
+layout: page
+title: biblioteca
+print_title: Biblioteca
+comments: false
+--- 
+
+{% assign Categories = site.categories %}
+
+<div class="books">
+    {% for category in Categories %}
+        {% if category[1][0].tag == 'books' %}
+            <div class="book">
+                    <img  width="200px">
+                    <img src="assets/img/{{ category[0] | downcase | slugify }}.jpg" alt="{{ category[0] }}" class='img_center'>
+                    <span class="book-title">{{ category[0] | upcase }}</span>
+                    {% assign articles = category[1] | sort:'date' %}
+                    <ol>
+                        {% for item in articles %}
+                            <li><a href="{{item.url}}"> {{ item.title }} </a></li>
+                        {% endfor %}
+                    </ol>
+                    <br>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+</div>
