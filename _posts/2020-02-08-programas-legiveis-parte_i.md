@@ -79,3 +79,284 @@ Mais importante de tudo. Seja consistente na escolha de padrões. Se optar por u
 - Adicione detalhes importantes
 - Utilize nomes longos para escopos maiores
 - Utilize letras maiúsculas, sublinhados e outros recursos significativos
+
+
+### Nomes que não podem ser mal interpretados
+
+Uma preocupação que deve existir ao criar nome dos elementos em seu código é como ele será interpretado, como alerta os autores *"Que outros significados alguém poderia extrair deste nome?"*. Veja um exemplo trazido no livro:
+
+```python
+results = Database.all_objects.filter('year <= 2011')
+```
+
+Nesse código, é possível fazer duas interpretações de qual será o valor contido em *results*:
+
+- Objetos cujo ano é menor ou igual à 2011
+- Objetos cujo ano **não** é menor ou igual a 2011
+
+Note que o problema está na palavra `filter`, pois a mesma não expressa claramente o objetivo pretendido. Termos como `select` ou `exclude` fariam o filtro se tornar mais evidente para outras pessoas que lessem o código.
+
+Outro problema comum é nos intervalos inclusivos/exclusivos. O último elemento estará presente? Para suprir esse problema, uma dica é utilizar:
+
+- `first` e `last` para os modelos inclusivo/inclusivo
+- `begin` e `end` para os modelos  inclusivo/exclusivo
+
+```html
+fisrt                   last     => func(first, last) => [a, b, c, d, e, f]
+| a | b | c | d | e | f | g |   |
+begin                        end => func(begin, end)  => [a, b, c, d, e, f, g]
+```
+
+
+Variáveis booleanas são outro elemento que trazem dificuldade de interpretação, `authenticated` significa que o usuário está autenticado ou que deve se autenticar? Para evitar ruídos na interpretação, use palavras como `is_` e `has_`. Por exemplo:
+
+```python
+if user.is_authenticated() and user.has_permission():
+    ...
+```
+
+**ATENÇÃO** evite ao máximo termos negados na construção de variáveis booleanas, tal como `disable_ssl`, prefira deixá-los em uma forma afirmativa `user_ssl`.
+
+### Estética
+
+Um item muito negligenciado na maioria dos códigos é a sua estética. Por estética, diz-se a organização e disposição dos elementos de forma a facilitar a leitura. Por isso, sempre siga esses três princípios:
+
+- utilize layouts consistentes e padrões com os quais o leitor possa se acostumar
+- faça com que códigos semelhantes tenham um visual semelhantes
+- agrupe linhas de código relacionado em blocos
+
+Em linguagens como Python, que possuem um forte senso estético, seguir essas regras se torna fácil, mas imagine um código em outra linguagem, como este apresentado pelo autor:
+
+```java
+class StatsKeeper {
+    public:
+    // Uma classe para monitorar uma série de doubles
+    void add(double d); // e métodos para obter estatísticas sobre eles
+    private: int count; /* quanto até agora
+    */ public: 
+        double Average();
+
+    private:    double minimum;
+    double Average();
+    list<double>
+        past_items
+        ; double maximum;
+};
+```
+
+Sobre o aspecto funcional, um código como esse pode funcionar perfeitamente, mas quantas vezes foi necessário relê-lo ou quanto tempo foi gasto para entendê-lo? A questão estética torna tudo mais fácil:
+
+```java
+// Uma classe para monitorar uma série de doubles
+// e métodos para obter estatísticas sobre eles
+class StatsKeeper {
+    public:
+        void Add(double d);
+        double Average();
+
+    private:
+        list<double> past_items;
+        int count; // quantos até agora
+
+        double minimum;
+        double maximum;
+}
+```
+
+Outro recurso poderoso no quesito estético são as quebras de linha. Com os espaçamentos e quebras de linha, o código pode se tornar muito mais legível. Veja três formas de apresentar o mesmo código:
+
+```java
+public class PerformanceTester {
+    public static final TcpConnectionsSimulator wifi = new TcpConnectionSimulator(
+        500, /* Kbps */
+        80, /* latência em milissegundos */
+        200, /* oscilação */
+        1 /* % da perda de pacotes */
+    );
+}
+```
+
+```java
+public class PerformanceTester {
+    public static final TcpConnectionsSimulator wifi = 
+        new TcpConnectionSimulator(
+            500,    /* Kbps                         */
+            80,     /* latência em milissegundos    */
+            200,    /* oscilação                    */
+            1       /* % da perda de pacotes        */
+        );
+}
+```
+
+```java
+public class PerformanceTester {
+    // TcpConnectionSimulator( throughput, latency, jitter, packet_loss)
+    //                           [Kbps]      [ms]    [ms]   [percentual]
+    public static final TcpConnectionsSimulator wifi = 
+        new TcpConnectionSimulator(500,       80,     200,       1);
+}
+```
+
+Isoladamente pouca parece ser a diferença, mas se esse teste fosse feito com vários tipos de conexões. O segundo formato ganharia vantagem sobre o primeiro, pois os parâmetros e suas informações ficam organizadas, facilitando a consulta. Já o terceiro modelos supera o segundo, pois fica fácil saber a qual valor cada item corresponde.
+
+O terceiro exemplo gera um fenômeno denominado *gestalt*, onde indiretamente o leitor "vê" a divisão dos itens como colunas. O que permite o agrupamento de itens e a separação dos mesmos. 
+
+```python
+city     = requests.GET('city')
+state    = requests.GET('state')
+country  = requests.GET('country')
+username = requests.GET('username')
+```
+
+Note como a criação dessas colunas evidencia o papel de cada item e permite que a leitura do código se torne mais fluída. O mesmo acontece com listas e dicionários:
+
+```python
+states = [
+    {'state': 'SP',   'capital': 'Sao_Paulo',         'year': '2010'},
+    {'state': 'MG',   'capital': 'Belo_Horizonte',    'year': '2010'},
+    {'state': 'SC',   'capital': 'Florianopolis',     'year': '2009'},
+    {'state': 'GO',   'capital': 'Goiania',           'year': '2012'},
+    {'state': 'RJ',   'capital': 'Rio_de_Janeiro',    'year': '2007'},
+]
+```
+
+Ser consistente em uma padrão é extremamente importante para legibilidade do código. Seja na separação do código em blocos, na ordem com que os itens são passados, na criação de quebras de linha em códigos extensos.
+
+**Mantenha a ordem com que os elementos são apresentados**
+```python
+user = {
+    'username': '',
+    'name':     '',
+    'email':    '',
+}
+```
+
+Quando temos a ordem de apresentação de elementos, é necessário preservar a mesma, isso facilita na busca de informaçÕes e correspondências:
+
+```python
+# Não faça isso
+user['name'] = 'Bob Johns'
+user['email'] = 'bob.johns@gmail.com'
+user['username'] = 'bjohns'
+
+# Faça isso
+user['username'] = 'bjohns'
+user['name'] = 'Bob Johns'
+user['email'] = 'bob.johns@gmail.com'
+```
+
+Criar quebras de linhas, separando o aspecto de cada etapa do código, facilita na compreensão do qeu cada pequeno bloco está executando.
+
+**Crie quebras de linhas**
+```python
+def suggest_new_friends(user, email_password):
+    # Acessa os endereços de e-mail dos amigos do usuário
+    friends = user.friends()
+    friends_emails = set(f.mail for f in friends)
+
+    # Importa todos os endereços de e-mail da conta de e-mail deste usuário
+    contacts = import_contacts(user.email, email_password)
+    contacts_emails = set(c.email for c in contacts)
+
+    # Encontra usuários correspondentes com os quais ele/ela ainda não tem amizade
+    non_friends_emails = concact_emails - friends_emails
+    suggested_friends = User.objects.select(email__in=non_friends_emails)
+
+    # Apresenta essas listas na página
+    display['user'] = user
+    display['friends'] = friends
+    display['suggested_friends'] = suggested_friends
+
+    return render('suggested_friends.html', display)
+
+```
+
+**Resumo**
+
+- Se vários blocos de código estão realizando tarefas semelhantes, tente fazer com que tenham a mesma silhueta
+- Alinhe partes de seu código em "colunas"para facilitar a leitura
+- Se o código menciona A, B e C em um local, evite dizer B, C e A em outro. Escolha uma ordem significativa e se atenha a ela
+- Utilize linhas em branco para quebrar blocos extensos em parágrafos lógicos
+
+**Lembre-se:** utilizar um estilo consistente é mais importante do que escolher o estilo "certo"
+
+### Como saber o que comentar
+
+Em essência, os comentários devem aparecer para facilitar a compreensão do código. Por isso, comentários sobre o porque algo foi criado de tal forma, erros já percebidos, mas deixados propositalmente, restrições e motivos de constantes serem aplicados, etc. tornam a leitura fluída. Os comentários devem garantir que o leitor não se percam em detalhes, mas sim que tenha a capacidade de entender a essência do código e assim, analisar com facilidade seu funcionamento.
+
+**O que não deve ser comentado:**
+
+- fatos que podem ser rapidamente deduzidos a partir do próprio código
+- "comentários-muleta" que compensam códigos ruins (como um nome de função inadequada) - é melhor corrigir seu código
+
+**Pensamentos que devem ser registrados:**
+
+- informações que explicam o funcionamento do seu código (o "comentário do diretor")
+- falhas de seu código, utilizando marcadores como `TODO: `
+- a "história" que conta como uma função recebeu seu valor
+
+_Lista de Possíveis Marcadores_
+
+| Marcador | Uso |
+| --- | --- |
+| TODO | Elementos ainda não implementados |
+| FIXME | Código que sabidamente apresenta problemas | 
+| HACK | Solução admitidamente deselegante para um problema | 
+| XXX | Perigo! Há um grande problema aqui | 
+
+**Coloque-se na posição do leitor:**
+
+- antecipe quais partes de seu código farão seus leitores pensarem "Hein?" e crie comentários explicando-as
+- documente comportamentos surpreendentes que talvez sejam inesperados
+- utilize comentários "abrangente" no nível do arquivo/classe para explicar como todos os elementos de seu código se encaixam
+- resuma blocos de código com comentários para que o leitor não se perca nos detalhes
+
+
+### Crie comentários precisos e compactos
+
+A ideia-chave na criação de comentários é que os mesmos possuam alta taxa de informação-por-espaço. Ou seja, em poucas palavras/linhas deve ser possível ter as informações necessárias para compreender o código. Por isso, seguem algunas recomendações:
+
+Evite pronomes ambíguos como "ele/ela" e "isso" quando puderem ser mal interpretados.
+
+```python
+# Evite isso
+# Insere o dado no cache, verificando primeiro se ele não é grande demais
+
+"""
+Quem é grande demais? O dado ou o cache?
+"""
+
+# Faça isso
+# Se o dado for pequeno o bastante, insira-o no cache
+```
+
+Descreva o comportamento de uma função com o máximo de precisão e praticidade e utilize exemplos de entrada/saída para ilustrar situações confusas
+
+```python
+# Evite isso
+# Retorna o número de linhas do arquivo
+def count_lines(filename):
+    ...
+
+# Faça isso
+# Conta quanto bytes de nova linha ('\n') existem no arquivo
+# Exemplo: "hello\n cruel\n world\n" => 3
+def count_lines(filename):
+    ...
+```
+
+Declare a intenção abrangente do seu código, em vez de se concentrar em detalhes óbvios. Por exemplo, ao invés de dizer: `Itera a lista na ordem reversa`, diga algo como `Apresenta cada preço, do maior para o menor`.
+
+Por fim, utilize palavras que carreguem o máximo de significado possível. Por exemplo, os dois comentários abaixo retratam a mesma coisa:
+
+```python
+# Esta classe contém membros que armazenam a mesma informação do banco de dados, mas
+# que foram armazenados aqui por velocidade. Quando esta classe for lida no futuro,
+# verificaremos primeiro se esses membros existem, e, se afirmativo, eles serão
+# retornados; do contrário o banco de dados será lido e armazenaremos os dados nesses
+# campos para uso futuro
+```
+
+```python
+# Esta classe atual como uma camada de cache para o banco de dados
+```
