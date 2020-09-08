@@ -5,7 +5,7 @@ title:  "Melhorias Superficiais"
 slug: a-arte-de-escrever-programas-legiveis melhorias superficiais
 tag: books
 category: "A Arte de Escrever Programas Legíveis"
-comments: false
+comments: true
 ---
 
 ![Capa do Livro](../assets/img/a-arte-de-escrever-programas-legíveis.jpg)
