@@ -1,16 +1,16 @@
 ---
 layout: page
-title: biblioteca
-print_title: Biblioteca
+title: tutorial
+print_title: Tutorial
 comments: false
-order: 2
+order: 3
 ---
 
 {% assign Categories = site.categories %}
 
 <div class="books">
     {% for category in Categories %}
-    {% if category[1][0].tag == 'books' %}
+    {% if category[1][0].tag == 'tutorial' %}
     <div class="book">
         <img width="200px">
         <img src="assets/img/{{ category[0] | downcase | slugify }}.jpg" alt="{{ category[0] }}" class='img_center'>
