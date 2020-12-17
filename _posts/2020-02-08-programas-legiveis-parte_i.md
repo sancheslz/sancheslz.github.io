@@ -102,9 +102,9 @@ Outro problema comum é nos intervalos inclusivos/exclusivos. O último elemento
 - `begin` e `end` para os modelos  inclusivo/exclusivo
 
 ```html
-fisrt                   last     => func(first, last) => [a, b, c, d, e, f]
+fisrt                        last => func(first, last) => [a, b, c, d, e, f]
 | a | b | c | d | e | f | g |   |
-begin                        end => func(begin, end)  => [a, b, c, d, e, f, g]
+begin                        end  => func(begin, end)  => [a, b, c, d, e, f, g]
 ```
 
 
