@@ -4,7 +4,7 @@ date: 2020-12-17 00:00:00 -0300
 title: "Terminal"
 slug: cheatsheet terminal
 tag: cheatsheet
-category: "Terminal"
+category: "Cheatsheet"
 comments: false
 ---
 
@@ -200,7 +200,7 @@ comments: false
             </div>
             <div class="cheatsheet-content-row">
                 <div class="cheatsheet-command">[:word:]</div>
-                <div class="cheatsheet-description">Semelhante ao alnum mas adiciona o _</div>
+                <div class="cheatsheet-description">Semelhante ao [:alnum:] mas adiciona o _</div>
             </div>
             <div class="cheatsheet-content-row">
                 <div class="cheatsheet-command">[:blank:]</div>
@@ -220,7 +220,7 @@ comments: false
             </div>
             <div class="cheatsheet-content-row">
                 <div class="cheatsheet-command">[:print:]</div>
-                <div class="cheatsheet-description">Caracteres imprimíveis (todos de graphmais o espaço )</div>
+                <div class="cheatsheet-description">Caracteres imprimíveis (todos de [:graph:] mais o espaço )</div>
             </div>
             <div class="cheatsheet-content-row">
                 <div class="cheatsheet-command">[:space:]</div>
@@ -233,8 +233,137 @@ comments: false
         </div>
     </div>
 
+    <div class="cheatsheet-item">
+        <div class="cheatsheet-title">Obter Ajuda</div>
+        <div class="cheatsheet-content">
 
 
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">man &lt;comando&gt;</div>
+                <div class="cheatsheet-description">Abre o manual de ajuda sobre o comando</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">&lt;comando&gt; --help</div>
+                <div class="cheatsheet-description">Exibe informações rápidas de ajuda (se disponível)</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">apropos &lt;comando&gt;</div>
+                <div class="cheatsheet-description">Retorna a seção do manual em que se encontra o comando</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">whatis &lt;comando&gt;</div>
+                <div class="cheatsheet-description">Exibe uma breve descriçao do comando e sua página no manual</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">info &lt;comando&gt;</div>
+                <div class="cheatsheet-description">Retorna as informações principais sobre determinado comando</div>
+            </div>
 
+        </div>
+    </div>
+
+    <div class="cheatsheet-item">
+        <div class="cheatsheet-title">Criando Alias</div>
+        <div class="cheatsheet-content">
+
+
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">alias &lt;apelido&gt;="&lt;comando1;comando2&gt;"</div>
+                <div class="cheatsheet-description">Cria um alias na seção do Terminal</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">type &lt;apelido&gt;</div>
+                <div class="cheatsheet-description">Verifica se o alias está disponível para ser criado</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">unalias &lt;apelido&gt;</div>
+                <div class="cheatsheet-description">Exclui o alias criado</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">alias</div>
+                <div class="cheatsheet-description">Exibe a lista de alias cadastrados</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="cheatsheet-item">
+        <div class="cheatsheet-title">Lendo Arquivos</div>
+        <div class="cheatsheet-content">
+
+
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">cat &lt;arquivo&gt;</div>
+                <div class="cheatsheet-description">Exibe o conteúdo do arquiv</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">less &lt;arquivo&gt;</div>
+                <div class="cheatsheet-description">Exibe o conteúdo do arquivo</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">sort &lt;arquivo&gt;</div>
+                <div class="cheatsheet-description">Exibe o conteúdo em ordem alfabética</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">uniq &lt;arquivo&gt;</div>
+                <div class="cheatsheet-description">Exibe apenas as linhas únicas do arquivo</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">tail &lt;arquivo&gt;</div>
+                <div class="cheatsheet-description">Exibe apenas o final do arquivo</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">head &lt;arquivo&gt;</div>
+                <div class="cheatsheet-description">Exibe apenas o começo do arquivo</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">tee &lt;arquivo&gt;</div>
+                <div class="cheatsheet-description">Permite a inserção no arquivo de modo interativo, retornando a saída
+                    padrão
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="cheatsheet-item">
+        <div class="cheatsheet-title">Usando o Echo</div>
+        <div class="cheatsheet-content">
+
+
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">echo &lt;argumento&gt;</div>
+                <div class="cheatsheet-description">Retorna o resultado dos argumentos passados</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">echo $((2+2))</div>
+                <div class="cheatsheet-description">Retorna o resultado da equação passada</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">echo texto-{A,B,C}</div>
+                <div class="cheatsheet-description">Retorna múltiplos textos com o padrão especificado</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">echo texto-{1..5}</div>
+                <div class="cheatsheet-description">Retorna múltiplas textos com o intervalo especificado. Pode ser
+                    letra ou números</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">echo text{A{1,2},B{3,4}}</div>
+                <div class="cheatsheet-description">Retorna o padrão das chaves aninhadas</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">echo $USER</div>
+                <div class="cheatsheet-description">Retorna o valor da variável, neste exemplo, o usuário</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">echo $(cal)</div>
+                <div class="cheatsheet-description">Retorna o restuldado do parâmetro passado</div>
+            </div>
+
+
+        </div>
+    </div>
 
 </div>
