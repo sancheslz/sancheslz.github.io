@@ -453,3 +453,56 @@
   -webkit-mask-image: url('../assets/icons/ruby.svg');
   mask-image: url('../assets/icons/ruby.svg');
 }
+
+.cheatsheet {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: stretch;
+  
+  &-item {
+    min-width: 300px;
+    padding: 1em;
+    flex: 3;
+  }
+  
+  &-title {
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    padding-bottom: 0.5em;
+    text-align: center;
+  }
+  
+  &-content{
+    font-size: 0.9em;
+    border-radius: 0.1em;
+    box-shadow: 2px 2px 3px 1px gray;
+    padding: 1.5em;
+    
+    &-row{
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0.3em 0;
+      border-top: 1px solid lightgray; 
+    }
+    
+    &-row:first-child{
+      border-top: none; 
+    }
+  }
+
+  &-command {
+    color: $brand-color;
+    padding-right: 1.5em;
+    flex: 1;
+  }
+
+  &-description {
+    flex: 2;
+  }
+}

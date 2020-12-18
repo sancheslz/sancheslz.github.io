@@ -6,24 +6,20 @@ comments: false
 order: 2
 ---
 
-{% assign Categories = site.categories %}
+{% assign PostByCategory = site.posts | where: "tag", "books" | sort: date | group_by: "category" %}
 
 <div class="books">
-    {% for category in Categories %}
-    {% if category[1][0].tag == 'books' %}
+    {% for post in PostByCategory %}
     <div class="book">
         <img width="200px">
-        <img src="assets/img/{{ category[0] | downcase | slugify }}.jpg" alt="{{ category[0] }}" class='img_center'>
-        <span class="book-title">{{ category[0] | upcase }}</span>
-        {% assign articles = category[1] | sort:'date' %}
+        <img src="assets/img/{{ post.name | downcase | slugify }}.jpg" alt="{{ post.name }}" class='img_center'>
+        <span class="book-title">{{ post.name | upcase }}</span>
         <ol>
-            {% for item in articles %}
+            {% for item in post.items %}
             <li><a href="{{item.url}}"> {{ item.title }} </a></li>
             {% endfor %}
         </ol>
         <br>
     </div>
-    {% endif %}
     {% endfor %}
-
 </div>

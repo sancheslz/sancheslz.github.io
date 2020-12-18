@@ -1,0 +1,240 @@
+---
+layout: post
+date: 2020-12-17 00:00:00 -0300
+title: "Terminal"
+slug: cheatsheet terminal
+tag: cheatsheet
+category: "Terminal"
+comments: false
+---
+
+<div class="cheatsheet">
+
+    <div class="cheatsheet-item">
+        <div class="cheatsheet-title">Navegação</div>
+        <div class="cheatsheet-content">
+
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">pwd</div>
+                <div class="cheatsheet-description">Exibe o caminho do diretório atual</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">cd</div>
+                <div class="cheatsheet-description">Muda para o diretório de início do Terminal</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">cd ..</div>
+                <div class="cheatsheet-description">Volta o diretório em um nível</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">cd ~</div>
+                <div class="cheatsheet-description">Retorna ao diretório-base do usuário</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">cd /</div>
+                <div class="cheatsheet-description">Retorna ao diretório raiz</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">cd -</div>
+                <div class="cheatsheet-description">Retorna ao último diretório acessado</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">cd /caminho/do/diretorio</div>
+                <div class="cheatsheet-description">Muda para o diretório especificado</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="cheatsheet-item">
+        <div class="cheatsheet-title">Arquivos e Diretórios</div>
+        <div class="cheatsheet-content">
+
+
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">mkdir nome_pasta</div>
+                <div class="cheatsheet-description">Criar uma pasta</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">rmdir nome_pasta</div>
+                <div class="cheatsheet-description">Remove uma pasta (vazia)</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">rm arquivo</div>
+                <div class="cheatsheet-description">Remove um arquivo</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">mv origem destino</div>
+                <div class="cheatsheet-description">Move/Renomeia o arquivo</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">cp origem destino</div>
+                <div class="cheatsheet-description">Copia um arquivo</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">&lt;comando&gt; -i</div>
+                <div class="cheatsheet-description">Confirma antes de executar (evita sobrescrição)</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">&lt;comando&gt; -r</div>
+                <div class="cheatsheet-description">Opera de modo recursivo</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">&lt;comando&gt; -v</div>
+                <div class="cheatsheet-description">Exibe a lista das operações realizadas</div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="cheatsheet-item">
+        <div class="cheatsheet-title">Listagem de Arquivos</div>
+        <div class="cheatsheet-content">
+
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">ls</div>
+                <div class="cheatsheet-description">Lista os itens do diretório</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">ls -a</div>
+                <div class="cheatsheet-description">Inclúi na exibição os arquivos ocultos</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">ls -l</div>
+                <div class="cheatsheet-description">Exibe uma lista com detalhes dos arquivos</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">ls -F</div>
+                <div class="cheatsheet-description">Exibe o tipo do arquivo (inclui / nos diretórios)</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">ls -G</div>
+                <div class="cheatsheet-description">Exibe com cores para cada tipo de arquivo</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">ls -lh</div>
+                <div class="cheatsheet-description">Exibe o tamanho do arquivo em formato legível ao usuário</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">ls -r</div>
+                <div class="cheatsheet-description">Exibe os itens em order reversa</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">ls -S</div>
+                <div class="cheatsheet-description">Exibe os itens por ordem de tamanho</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">ls -S</div>
+                <div class="cheatsheet-description">Exibe os itens por ordem da última modificação</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">ls pasta1 pasta2</div>
+                <div class="cheatsheet-description">Exibe os itens das duas pastas</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">ls -i</div>
+                <div class="cheatsheet-description">Exibe o hash do arquivo, isto é, seu valor na memória do computador
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <div class="cheatsheet-item">
+        <div class="cheatsheet-title">Caracteres Curinga</div>
+        <div class="cheatsheet-content">
+
+
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">*</div>
+                <div class="cheatsheet-description">Quaisquer caracteres</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">?</div>
+                <div class="cheatsheet-description">Quaisquer um caracter</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[char]</div>
+                <div class="cheatsheet-description">Quaisquer caracter do conjunto</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[!char]</div>
+                <div class="cheatsheet-description">Quaisquer caracter fora do conjunto</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[[:class:]]</div>
+                <div class="cheatsheet-description">Quaisquer caracter de uma classe</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="cheatsheet-item">
+        <div class="cheatsheet-title">Classes de Caracteres</div>
+        <div class="cheatsheet-content">
+
+
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[:alnum:]</div>
+                <div class="cheatsheet-description">Qualquer caracter alfanumérico</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[:alpha:]</div>
+                <div class="cheatsheet-description">Qualquer caracter alfabético</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[:digit:]</div>
+                <div class="cheatsheet-description">Qualquer número</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[:lower:]</div>
+                <div class="cheatsheet-description">Qualquer caracter lowercase</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[:upper:]</div>
+                <div class="cheatsheet-description">Qualquer caracter uppercase</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[:word:]</div>
+                <div class="cheatsheet-description">Semelhante ao alnum mas adiciona o _</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[:blank:]</div>
+                <div class="cheatsheet-description">Inclui espaços e tabulações</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[:cntrl:]</div>
+                <div class="cheatsheet-description">Caracteres de controle (ASCII de 33 a 126)</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[:graph:]</div>
+                <div class="cheatsheet-description">Os caracteres visíveis (ASCII de 33 a 126)</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[:punct:]</div>
+                <div class="cheatsheet-description">Caracteres de pontuação</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[:print:]</div>
+                <div class="cheatsheet-description">Caracteres imprimíveis (todos de graphmais o espaço )</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[:space:]</div>
+                <div class="cheatsheet-description">Todos os caracteres que representam um espaço (\t \r \n \v \f)</div>
+            </div>
+            <div class="cheatsheet-content-row">
+                <div class="cheatsheet-command">[:xdigit:]</div>
+                <div class="cheatsheet-description">Caracteres que representam os hexadecimais</div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
