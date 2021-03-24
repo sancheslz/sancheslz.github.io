@@ -11,8 +11,7 @@ order: 3
 <div class="books">
     {% for post in PostByCategory %}
     <div class="book">
-        <img width="200px">
-        <img src="assets/img/{{ post.name | downcase | slugify }}.jpg" alt="{{ post.name }}" class='img_center'>
+        <img src="assets/img/{{ post.name | downcase | slugify }}.jpg" alt="{{ post.name }}" class='img_center' height="200px">
         <span class="book-title">{{ post.name | upcase }}</span>
         <ol>
             {% for item in post.items %}
