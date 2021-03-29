@@ -453,6 +453,11 @@
   -webkit-mask-image: url('../assets/icons/ruby.svg');
   mask-image: url('../assets/icons/ruby.svg');
 }
+.rails {
+  background-color: #CC0000;
+  -webkit-mask-image: url('../assets/icons/rubyonrails.svg');
+  mask-image: url('../assets/icons/rubyonrails.svg');
+}
 
 .cheatsheet {
   display: flex;
