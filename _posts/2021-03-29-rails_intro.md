@@ -10,6 +10,8 @@ comments: false
 
 ## O que é Rails
 
+![Logotipo do Rails](../assets/img/rails.jpg)
+
 Lançado em 2004, o Ruby on Rails (ou apenas Rails) é um meta-framework de padrão MVC (_Model-View-Controller_), de código livre (licença MIT), que encoraja e facilita o desenvolvimento de aplicações web ao utilizar padrões comuns da internet como html, json e xml.
 
 Como um meta-framework (framework de frameworks), ele é estruturado a partir de outros frameworks:
@@ -29,7 +31,7 @@ A filosofia do Rails tem dois princípios fundamentais que norteriam sua estrutu
 
 ## Visão Geral
 
-![Visão Geral do Rails](../assets/img/rails_architecture.png)
+![Visão Geral do Rails](../assets/img/rails_architecture.jpg)
 
 A imagem acima, não pretende ser detalhista ou precisa sobre os detalhes do Rails, mas sim, mostrar a visão geral da arquitetura do framework e como cada elemento se relaciona.
 
