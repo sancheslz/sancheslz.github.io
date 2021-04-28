@@ -10,7 +10,7 @@ layout: default
   {{ content }}
 
   {%- if site.posts.size > 0 -%}
-    <h2 class="post-list-heading">Últimos {{ page.list_title | default: "Posts" }}</h2>
+    <h2 class="post-list-heading">Últimos {{ page.list_title | default: "Artigos" }}</h2>
     <ul class="post-list">
       {% assign posts = site.posts%}
       {%- for post in posts | limit:5 -%}
