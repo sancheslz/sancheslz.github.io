@@ -177,4 +177,4 @@ Ao executar o servidor, será possível ver o comportamento-base de uma aplicaç
 
 ## Referências
 
-- [Documentação Oficial](https://docs.djangoproject.com/en/3.1/)
+- [Documentação Oficial](https://docs.djangoproject.com/en/3.2/)
