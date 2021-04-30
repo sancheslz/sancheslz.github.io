@@ -4,6 +4,7 @@ date: 2021-03-31 00:00:00 -0300
 title: "Introdução"
 slug: django intro
 tag: tutorial
+order: 1
 category: "Django"
 comments: false
 ---

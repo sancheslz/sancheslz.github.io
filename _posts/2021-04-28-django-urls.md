@@ -4,6 +4,7 @@ date: 2021-04-28 00:00:00 -0300
 title: "URLs"
 slug: django urls
 tag: tutorial
+order: 2
 category: "Django"
 comments: false
 ---

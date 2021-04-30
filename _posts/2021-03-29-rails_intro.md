@@ -4,6 +4,7 @@ date: 2021-03-29 00:00:00 -0300
 title: "Introdução"
 slug: rails intro
 tag: tutorial
+order: 1
 category: "Rails"
 comments: false
 ---

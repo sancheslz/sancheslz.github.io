@@ -14,8 +14,9 @@ order: 3
         <img src="assets/img/{{ post.name | downcase | slugify }}.jpg" alt="{{ post.name }}" class='img_center' height="200px">
         <span class="book-title">{{ post.name | upcase }}</span>
         <ol>
-            {% for item in post.items %}
-            <li><a href="{{item.url}}"> {{ item.title }} </a></li>
+            {% assign postOrdered = post.items | sort: "order" %}
+            {% for item in postOrdered %}
+                <li><a href="{{item.url}}"> {{ item.title }} </a></li>
             {% endfor %}
         </ol>
         <br>
