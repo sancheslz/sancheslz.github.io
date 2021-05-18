@@ -26,7 +26,7 @@ manage.py shell
 Para criar qualquer registro no Banco de Dados, primeiro é necessário importar o `model` a ser utilizado. Para isso, execute o comando:
 
 ```
->>> from <app_name>.models import <ModelName>
+from <app_name>.models import <ModelName>
 ```
 
 Importado o `model` há alguns caminhos possíveis para a criação de um novo objeto:
@@ -59,14 +59,14 @@ Book.objects.create(title='Game of Thrones')
 
 ### Vários Registros
 
-Caso seja necessário criar vários registros de uma única vez, o método `bulk_create()` deve ser utilizado no lugar do `create()`. Este método realizar apenas uma chamada no Banco de Dados, sendo portanto mais performático. Além disso, ele recebe um lista de objetos a serem criados:
+Caso seja necessário criar vários registros de uma única vez, o método `bulk_create()` deve ser utilizado no lugar do `create()`. Este método realiza apenas uma chamada no Banco de Dados, sendo, portanto, mais performático. Além disso, ele recebe um lista de objetos a serem criados:
 
 ```python
 from book.models import Book
 
 Book.objects.bulk_create([
     Book(title='The Hobbit'),
-    Bookt(title='The Lord of The Rings)
+    Bookt(title='The Lord of The Rings')
 ])
 ```
 
@@ -74,7 +74,7 @@ Book.objects.bulk_create([
 
 ### ForeignKey
 
-Nos casos de relacionamento do tipo `ForeignKey`, deve ser passado como atributo ao model a referência ao objeto da chave-estrangeira:
+Nos casos de relacionamento do tipo `ForeignKey`, deve ser passado como atributo ao `model` a referência do objeto da chave-estrangeira:
 
 ```python
 from book.models import Book, Author
@@ -173,7 +173,7 @@ book = Book.objects.last()
 book.delete()
 ```
 
-Também é possível deleter todos os objetos de um `QuerySet`, bastando encademar o método `delete()` na consulta realizada:
+Também é possível deletar todos os objetos de um `QuerySet`, bastando encadear o método `delete()` na consulta realizada:
 
 ```python
 from book.models import Book
