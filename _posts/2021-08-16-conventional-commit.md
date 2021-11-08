@@ -11,7 +11,7 @@ comments: false
 
 ## O que é Conventional Commit
 
-A especificação do *Conventional Commits* é uma convenção leve que proporciona um conjunto de regras para criar commits que explicitem a história do projeto. Ele se baseia nas definições de versões do [SemVer](https://semver.org/). Dessa forma, permite a rápida identificação de novas funcionalidades, correções de bugs, mudanças de versão, entre outros, tudo através da padronização do commit.
+A especificação do *Conventional Commit* é uma convenção leve que proporciona um conjunto de regras para criar *commits* que explicitem a história do projeto. Ele se baseia nas definições de versões do [SemVer](https://semver.org/). Dessa forma, permite a rápida identificação de novas funcionalidades, correções de *bugs*, mudanças de versão, entre outros, tudo através da padronização do *commit*.
 
 SemVer | Conventional Commit
 --- | ---
@@ -19,9 +19,11 @@ Major (XX.yy.zz) | breaking change
 Minor (xx.YY.zz) | feat
 Patch (xx.yy.ZZ) | fix
 
-> Faça quantos commits forem necessários, use as quebras para manter tudo organizado
+> A Regra é: faça tantos *commits* quanto forem necessários, use as quebras para manter tudo organizado
 
 ## Anatomia Geral
+
+No *Conventional Commit*, o histórico possui itens opcionais e itens obrigatório, podendo ter a seguinte estrutura:
 
 ```console
 <type> (<scope>): <short_description>
@@ -31,17 +33,19 @@ Patch (xx.yy.ZZ) | fix
 <key>: <description>
 ```
 
-- `type`: define a natureza do commit realizado, isto é, se é uma nova funcionalidade, um novo teste, etc.
-- `scope` (opcional): escopo de alteração deste commit, se afeta um rota, um serviço, uma interface, etc.
+- `type`: (obrigatório) define a natureza do *commit* realizado, isto é, se é uma nova funcionalidade, um novo teste, etc.
+- `scope` (opcional): escopo de alteração deste *commit*, se afeta um rota, um serviço, uma interface, etc.
 - `short_description`: descrição curta das alterações realizadas, sendo máximo 70 caracteres
 - `details` (opcional): bloco de detalhes
-- `key` (opcional): rodapé com especificações da *issue* encerrada, responsável pela tarefas ou da definição da nova versão (`BREAKING CHANGE`). Recomenda-se o uso do `kebab-case`
+- `key` (opcional): rodapé com especificações da *issue* encerrada, responsável pela tarefa ou da definição da nova versão (`BREAKING CHANGE`). Recomenda-se o uso do padrão `kebab-case`
 
 ## Tipos
 
+Seguindo a convenção da equipe do Angular, os tipos são classificados da seguinte forma:
+
 Tipo | Descrição
 --- | ---
-`chore` | adição ou alteração das configurações do projeto
+`chore` | adição ou alteração nas configurações do projeto
 `build` | afeta o build do sistema ou dependências externas
 `ci` | altera as configuração do CI e seus scripts
 `docs` | após mudanças na documentação

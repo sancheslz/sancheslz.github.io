@@ -142,7 +142,9 @@ bundle install
 No arquivo `spec/rails_helper.rb` ative a seguinte linha:
 
 ```ruby
+# ...
 Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
+# ...
 ```
 
 E crie o arquivo `spec/support/factory_bot.rb`, com a seguinte configuração:
@@ -154,6 +156,8 @@ end
 ```
 
 Para mais detalhes, veja as orientações de instalação e configuração no [Repositório Oficial](https://github.com/thoughtbot/factory_bot_rails)
+
+---
 
 ### Instalando o ShouldaMatchers
 

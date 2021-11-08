@@ -11,17 +11,17 @@ comments: false
 
 ## O que é o Console
 
-Uma vez definido o modelo (`model`) responsável pelo registro e controle de informações em nosso Banco de Dados, um passo muito comum é testar o modelo construído e seu comportamento. Esse teste pode ser feito de forma automatizada ou através da interface que criarmos para nossa aplicação. Entretanto, para testes rápidos e exploratório, é comum a utilização do `console`.
+Uma vez definido o modelo (`model`) responsável pelo registro e controle de informações em nosso Banco de Dados, um passo muito comum é testar o modelo construído e seu comportamento. Esse teste pode ser feito de forma automatizada ou através da interface que criamos para nossa aplicação. Entretanto, para testes rápidos e exploratórios, é comum a utilização do `console`.
 
-O `console` é uma interface de linha de comando que carrega todas as informações do projeto Rails e possui conexão com o Banco de Dados. Dessa forma, a criação e manipulação de dados no sistema torna-se fácil e rápida. Além disso, o `console` é um ótimo lugar para testar e redesenhar as queries que farão às consultas dos nossos registros.
+O `console` é uma interface de linha de comando que carrega todas as informações do projeto Rails e possui conexão com o Banco de Dados. Dessa forma, a criação e manipulação de dados no sistema torna-se fácil e rápida. Além disso, o `console` é um ótimo lugar para testar e redesenhar as `queries` que farão às consultas dos nossos registros.
 
 Para acessar, basta utilizar o comando:
 
-```
+```console
 rails console
 ```
 
-> É possivel utilizar apenas `rails c` para rodar o console do Rails.
+> **Dica**: É possivel utilizar apenas `rails c` para rodar o console do Rails.
 
 ## Criando um Registro
 
@@ -50,7 +50,7 @@ A quarta opção é a criação do objeto a partir de um bloco `do-end`:
 
 ```ruby
 book = Book.new do |b|
-    b.title = 'The Hobbit'
+  b.title = 'The Hobbit'
 end
 ```
 
@@ -60,8 +60,8 @@ Caso seja necessário criar vários registros de uma única vez, basta passar um
 
 ```ruby
 Book.create([
-    {title: 'The Hobbit'},
-    {title: 'The Lord of The Rings'}
+  {title: 'The Hobbit'},
+  {title: 'The Lord of The Rings'}
 ])
 ```
 

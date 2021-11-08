@@ -11,7 +11,7 @@ comments: false
 
 ## O que é Shell
 
-Uma vez definido o modelo (`model`) responsável pelo registro e controle de informações em nosso Banco de Dados, um passo muito comum é testar o modelo construído e seu comportamento. O teste pode ser feito de forma automatizada, pode ser feito através do `admin` do Django, ou pela própria interface que criarmos para nossa aplicação. Entretanto, para testes rápidos e exploratório, é comum a utilização do `shell`.
+Uma vez definido o modelo (`model`) responsável pelo registro e controle das informações no Banco de Dados, um passo muito comum é testar o modelo construído e seu comportamento. O teste pode ser feito de forma automatizada, pode ser feito através do `admin` do Django, ou pela própria interface que criarmos para nossa aplicação. Entretanto, para testes rápidos e exploratórios, é comum a utilização do `shell`.
 
 O `shell` é uma interface de linha de comando que carrega todas as informações do projeto Django e possui conexão com o Banco de Dados. Dessa forma, a criação e manipulação de dados no sistema torna-se fácil e rápida. Além disso, o `shell` é um ótimo lugar para testar e redesenhar as `queries` que farão às consultas dos nossos registros.
 
@@ -90,7 +90,7 @@ lotr.save()
 
 ### ManyToMany
 
-Já nos casos de relacionamento do tipo `ManyToMany`, o relacionamento pode ser passado através do método `add()`, passando como argumento os objetos a serem relacionados:
+Já nos casos de relacionamento do tipo `ManyToMany`, o relacionamento deve ser passado através do método `add()`, passando como argumento os objetos a serem relacionados:
 
 ```python
 from book.models import Book, Author
@@ -122,7 +122,7 @@ Book.objects.all()
 
 ### Primeiro e Último Registro
 
-Para acessar o primeiro e último registro de determinado `model`, basta utilizar os métodos `first()` e `last`():
+Para acessar o primeiro e último registro de determinado `model`, basta utilizar os métodos `first()` e `last()`:
 
 ```python
 from book.models import Book, Author
@@ -183,7 +183,7 @@ Book.objects.filter(year=1950).delete()
 
 ## Observações
 
-O `shell` do Django utiliza o ambiente (`settings`) padrão definido pelo framework. Dessa forma, as alterações e modificações realizadas através do `shell` serão refletidas no Banco de Dados definido no arquivo de configurações. Para evitar esse comportamento e realizar as operações em um ambiente de isolado de testes, há duas opções:
+O `shell` do Django utiliza o ambiente (`settings`) padrão definido pelo framework. Dessa forma, as alterações e modificações realizadas através do `shell` serão refletidas no Banco de Dados definido no arquivo de configurações. Para evitar esse comportamento e realizar as operações em um ambiente de testes isolado, há duas opções:
 
 ### Configurando um ambiente de teste no Shell
 
@@ -207,9 +207,9 @@ test.utils.teardown_test_environment()
 
 Crie um arquivo com as configurações de teste, semelhantes do `settings.py` e defina o Banco de Dados que será utilizado nos testes. Em seguida, execute os comandos do `manage.py` informando o ambiente escolhido. Lembre-se que será fazer a migração neste novo ambiente:
 
-```
-manage.py migrate --settings=<folder_name>.<settings_file_name>
-manage.py shell --settings=<folder_name>.<settings_file_name>
+```console
+manage.py migrate --settings=<project_name>.<settings_file_name>
+manage.py shell --settings=<project_name>.<settings_file_name>
 ```
 
 ## Referências

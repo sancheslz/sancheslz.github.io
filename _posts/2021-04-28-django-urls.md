@@ -12,17 +12,17 @@ comments: false
 
 ## Rotas no Django
 
-Conforme apresentado na [Visão Geral](https://sancheslz.github.io/django-intro) do Django todas as requisições feitas pelo cliente passam inicialmente pelo arquivo de rotas, o `urls.py` um arquivo Python que herda as funcionalidades do `django.urls`. Por isso, conhecer como definir as rotas é uma tarefas essência para trabalhar com o framework.
+Conforme apresentado na [Visão Geral](https://sancheslz.github.io/django-intro) do Django todas as requisições feitas pelo cliente passam inicialmente pelo arquivo de rotas, o `urls.py` um arquivo Python que herda as funcionalidades do `django.urls`. Por isso, conhecer como definir as rotas é uma tarefas essencial para trabalhar com o framework.
 
 ## Anatomia Geral das URLs
 
-No Django, as URLs são definidas através de uma lista (array), contendo uma lista de funções `path`. Essa função recebe os parâmetros que irão indicar como o Framework deve lidar com as requisições:
+No Django, as URLs são definidas através de uma lista (*array*), contendo uma lista de funções `path`. Essa função recebe os parâmetros que irão indicar como o Framework deve lidar com as requisições:
 
 ```python
 path(route, view, kwargs=None, name=None)
 ```
 
-- `route`: string correspondendo indicando a URL ou seu padrão que deverá invocar a `view`
+- `route`: string indicando a URL ou o padrão que deverá invocar a `view`
 - `view`: camada que receberá a requisição e deverá retornar uma resposta ao cliente
 - `kwargs`: dicionário de argumentos a serem passados como parâmetros para a `view`
 - `name`: nome atribuido a rota, podendo ser utilizados posteriormente para reversão de URLs no templates do Django.
@@ -30,31 +30,34 @@ path(route, view, kwargs=None, name=None)
 Todas as rotas, devem ter início no arquivo principal de rotas:
 
 ```python
-# ./project/urls.py
+# myproject/urls.py
+# ---
+
 from django.contrib import admin
 from django.urls import path
 from home.views import main, other
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('current/', atual, {'current_year': 2005}),
     path('home/', main, name='super_app'),
+    path('current/', other, {'current_year': 2005}),
 ]
 ```
 
 ## Separando as URLs
 
-Conforme o projeto cresce em número de apps, manter todas as URLs em um único lugar pode não ser a melhor alternativa. Por isso o Django permite que as URLs sejam quebradas em arquivos específicos para cada aplicação, ficando o arquivo principal responsável de vincular todos os demais. Para isso, no arquivo `urls.py`, use a função `include`:
+Conforme o projeto cresce em número de apps, manter todas as URLs em um único lugar pode não ser a melhor alternativa. Por isso o Django permite que as URLs sejam quebradas em arquivos específicos para cada aplicação (*app*), ficando o arquivo principal responsável de vincular todos os demais. Para isso, no arquivo `urls.py`, use a função `include`:
 
 ```python
-# ./project/urls.py
-# ...
+# myproject/urls.py
+# ---
+
 from django.urls import path, include
 
 urlpatterns = [
     # ...
     path('home/', main, name='super_app'),
-    include('promotion.urls', namespace=promotion)
+    include('promotion.urls', namespace='promotion')
 ]
 ```
 
@@ -112,13 +115,16 @@ uuid | `'my_app/<uuid:value>'` | valida se o padrão apresentado corresponder a 
 path | `'my_app/<path:value>'` | valida se o padrão apresentado for um caminho, podendo, com isso incluir as barras "`/`"
 regex | `'my_app/?(<value>:[a-z]{2}[0-9]{4})'` | valida se o padrão apresentado corresponder com a expressão regular. Neste exemplo, será validado caso possua duas letras e quatro números. Exemplo: `my_app/az4529`
 
-Ademais, na construção de URLs com Expressões Regulares, pode-se utilizar argumento não capturados, bastando para isso, utilizar o seguinte padrão `?:`. Por exemplo:
+Ademais, na construção de URLs com Expressões Regulares, pode-se utilizar argumento não capturados, bastando para isso, utilizar a função `re_path` e como argumento utilizar o padrão `?:`. Por exemplo:
 
 ```python
 from django.urls import re_path
 
 urlpatterns = [
-    # Irá chamar a view posts com os seguinres argumentos: page_number. Exemplo: `posts/page` e `posts/page-2`
+    # Irá chamar a view posts com o argumento: <page_number>.
+    # Validando para situações como: 
+    # - posts/page
+    # - posts/page-2
     re_path(r'^posts/(?:page-(?P<page_number>\d+/)?$', posts)
 ]
 ```
@@ -151,15 +157,17 @@ Para isso, crie uma classe para o novo método:
 
 ```python
 # converter.py
-class ConvertFourDigits:
-    
-    regex = '[0-9]{4}' # padrão da regex
+# ---
 
-    # Método padrão de URL > Python
+class ConvertFourDigits:
+    # padrão da regex
+    regex = '[0-9]{4}'
+
+    # Método de conversão de URL para Python
     def to_python(self, valor):
         return int(valor)
     
-    # Método padrão de Python > URL
+    # Método de conversão de Python para URL
     def to_url(self, valor):
         return '%04d' % valor
 ```
@@ -174,6 +182,8 @@ O `converter` é a referência à classe criada, já o `type_name` é o nome que
 
 ```python
 # urls.py
+# ---
+
 from django.urls import path, register_converter
 from . import converter, views
 

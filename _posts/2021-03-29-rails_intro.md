@@ -13,7 +13,7 @@ comments: false
 
 ![Logotipo do Rails](../assets/img/rails.jpg)
 
-Lançado em 2004, o Ruby on Rails (ou apenas Rails) é um meta-framework de padrão MVC (_Model-View-Controller_), de código livre (licença MIT), que encoraja e facilita o desenvolvimento de aplicações web ao utilizar padrões comuns da internet como html, json e xml.
+Lançado em 2004, o Ruby on Rails (ou apenas Rails) é um meta-framework de padrão MVC (_Model-View-Controller_), de código livre (licença MIT), que encoraja e facilita o desenvolvimento de aplicações web ao utilizar padrões comuns da internet como `html`, `json` e `xml`.
 
 Como um meta-framework (framework de frameworks), ele é estruturado a partir de outros frameworks:
 
@@ -25,7 +25,7 @@ Como um meta-framework (framework de frameworks), ele é estruturado a partir de
 
 ## Filosofia
 
-A filosofia do Rails tem dois princípios fundamentais que norteriam sua estrutura e funcionamento:
+A filosofia do Rails tem dois princípios fundamentais que norteiam sua estrutura e funcionamento:
 
 - **Convention over Configuration (CoC)**: no desenvolvimento das aplicações, muitas coisas são um padrão recorrente, dessa forma, a filosofia do Rails enfatiza utilizar essa convenção como padrão, poupando tempo do desenvolvedor em ter que configurar cada pequeno elemento;
 - **Don't Repeat Yourself (DRY)**: utilizando-se fortemente de herança e orientação a objetos, o Rails destaca a importância de códigos limpos, concisos e sem repetições. Dessa forma, o framework incentiva que se algo será utilizado mais de uma vez ou em mais de um lugar, que seja feito um isolamento desse trecho de código para que o mesmo seja reaproveitado.
@@ -65,7 +65,7 @@ Além disso, é possível passar alguns argumento na criação do projeto, desta
 
 Ao criar um projeto Rails, o CLI fará a estruturação de diversos arquivos, de acordo com a arquitetura do framework, com destaque para os seguintes arquivos e diretórios:
 
-```bash
+```console
 root
 │
 ├─ README.md
@@ -92,12 +92,12 @@ root
 Abaixo uma breve descrição de cada arquivo/diretório:
 
 - `README.md`: arquivo de leitura onde as instruções gerais do projeto devem ser preenchidas
-- `Gemfile`: arquivo onde as dependências (gems) do projeto serão identificadas para instalação e execução
-- `app/controllers/`: diretório onde os controllers do projeto deverão ser criados
-- `app/models/`: diretório onde os do models projeto deverão ser criados
-- `app/views/`: diretório onde as views do projeto deverão ser criados
+- `Gemfile`: arquivo onde as dependências (`gems`) do projeto serão identificadas para instalação e execução
+- `app/controllers/`: diretório onde os `controllers` do projeto deverão ser criados
+- `app/models/`: diretório onde os do `models` projeto deverão ser criados
+- `app/views/`: diretório onde as `views` do projeto deverão ser criados
 - `config/routes.rb`: arquivo onde as rotas do projeto deverão ser identificadas
-- `db/migrate/`: diretório onde as migrações do banco de dados serão criadas
+- `db/migrate/`: diretório onde as migrações do Banco de Dados serão criadas
 - `db/schema.rb`: arquivo-base do Banco de Dados, onde as definições e estrutura de todas as tabelas do banco serão configuradas
 - `db/seeds.rb`: arquivo de _fixture_ com dados iniciais a serem carregados no Banco de Dados
 - `log/development.log`: arquivo com os logs de execução do ambiente de desenvolvimento
@@ -122,14 +122,17 @@ Abra o navegador em `localhost:3000` e você deverá ver a mensagem de boas-vind
 Todo o fluxo de MVC começa com uma requisição do cliente. Vamos criar um rota que defina a nossa página principal (_home page_). Para isso, abra o arquivo `config/routes.rb`. E digite:
 
 ```ruby
+# config/routes.rb
+# ---
+
 Rails.application.routes.draw do
-    get '/', to: 'home#index'
+  get '/', to: 'home#index'
 end
 ```
 
 Aqui há algumas definições importantes:
 
-- Definimos que essa rota será acessada através do verbo `get`
+- Definimos que essa rota será acessada através do verbo http `get`
 - Indicamos que ela deverá acessar o controller `home`
 - Indicamos que o controller deverá invocar o método `index`
 
@@ -138,26 +141,30 @@ Aqui poderíamos variar em qualquer verbo HTTP, qualquer nome de controller e qu
 Porém, no caso da _home page_, como elemento raiz de qualquer site, há uma conveção do Rails, de utilizar:
 
 ```ruby
+# config/routes.rb
+# ---
+
 Rails.application.routes.draw do
-    # É equivalente a: get '/', to: 'home#index'
-    root 'home#index'
+  # É equivalente a: get '/', to: 'home#index'
+  root 'home#index'
 end
 ```
 
 ### Criando o Controller
 
-Uma vez criada a rota e indicado que a mesma deverá chamar o controller `home`, para isso, crie o arquivo `app/controllers/home_controller.rb`. Esse arquivo será o responsável por controlar as requisições e respostas da _home page_.
+Uma vez criada a rota e indicado que a mesma deverá chamar o controller `home`, o próximo passo é criar o controller correspondente. Para isso, crie o arquivo `app/controllers/home_controller.rb`. Esse arquivo será o responsável por controlar as requisições e respostas da _home page_.
 
 Dentro deste arquivo, digite:
 
 ```ruby
-# Define o nome da classe, neste caso, Home
-# e Herda de ApplicationController
+# app/controllers/home_controller.rb
+# ---
+
 class HomeController < ApplicationController
-    # Método invocado pela rota default do controller
-    # Implicitamente retorna um render do template (view) de index.html.erb
-    def index
-    end
+
+  def index
+  end
+
 end
 ```
 
@@ -169,29 +176,35 @@ Um controller, tem duas ações principais: requisitar dados do Banco de Dados e
 
 Para a linguagem Ruby, toda função deve, obrigatoriamente ter um `return`, dessa forma, o uso da palavra não é necessária, de forma que o último elemento da função obrigatoriamente será retornada.
 
-O Rails, utilizando-se desse princípio, tem como comportamento padrão retornar uma view a partir de um template com a estrutura `controller/method`, de forma que o método `index` devolverá o arquivo `home/index.html.erb`.
+O Rails, utilizando-se desse princípio, tem como comportamento padrão retornar uma view a partir de um template com a estrutura `<controller_name>/<method_name>`, de forma que o método `index` devolverá o arquivo `home/index`.
 
 Apenas para mérito de exemplo, o que o Rails faz por padrão é renderizar da seguinte maneira:
 
 ```ruby
 class HomeController < ApplicationController
-    def index
-        return render template 'home/index' # Não faça isso!
-    end
+  def index
+    return render template 'home/index' # Não faça isso!
+  end
 end
 ```
 
-> O código acima é apenas para explicitar o comportamento do Rails, não faça assim!
+> **Atenção**: O código acima é apenas para explicitar o comportamento do Rails, não faça assim!
 
-Uma vez explicado esse comportamento do controller, precisamos criar nosso arquivo de view, para isso crie o arquivo `app/views/home/index.html.erb` e preencha com:
+Uma vez explicado esse comportamento do controller, precisamos criar nosso arquivo de view, para isso crie o arquivo `app/views/home/index.html.erb` e o preencha com:
 
 ```html
+<!-- # app/views/home/index.html.erb -->
+<!-- # --- -->
+
 <h1>Olá mundo</h1>
 ```
 
-Note que criamso um arquivo `HTML`, com uma extensão adicional `.erb`. Essa extesão adicional é o _Embedded Ruby_, isto é um código Ruby incorporado em um código HTML. Para provar que isso é verdade, altere o código acima para:
+Note que criamos um arquivo `HTML`, com uma extensão adicional `.erb`. Essa extesão adicional é o _Embedded Ruby_, isto é um código Ruby incorporado em um código HTML. Para provar que isso é verdade, altere o código acima para:
 
 ```html
+<!-- # app/views/home/index.html.erb -->
+<!-- # --- -->
+
 <h1>Olá mundo</h1>
 <p>2 + 2 é igual a <%= 2 + 2 %></p>
 <p>2 + 3 é igual a <% 2 + 3 %></p>

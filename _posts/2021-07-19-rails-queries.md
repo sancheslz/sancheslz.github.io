@@ -62,20 +62,20 @@ Book.where(
 # => #<ActiveRecord::Relation [#<Book id: 1, title: "The Lord of The Rings">]>
 ```
 
-> No método `where`, além da consulta através de condicionais com `hash`, também é possível realizar consultas com `SQL`
+> No método `where`, além da consulta através de condicionais com `hash`, também é possível realizar consultas com `SQL` (mais sobre isso adiante)
 
 ## Limitando e Ordenando o Retorno
 
 Uma boa prática, principalmente em Bancos com muitos registros, é limitar a quantia de valores retornados a cada vez, para isso, existem dois métodos que podem ser utilizados conjuntamente:
 
 - `limit`: determina quantos registros retornarão da consulta
-- `offset`: determina índice de início da consulta
+- `offset`: determina o índice de início da consulta
 
 ```ruby
 Book.all.limit(2).offset(10)
 ```
 
-Para order os valores retornados a partir de algum campos específico, basta utilizar o método `order` informando o campo desejado:
+Para ordenar os valores retornados a partir de algum campos específico, basta utilizar o método `order` informando o campo desejado:
 
 ```ruby
 Book.all.order(:created_at)
@@ -83,19 +83,19 @@ Book.all.order(:created_at)
 
 ## Valores Condicionais
 
-Para consultas com condicionais, a melhor forma é utilizar o marcado `?`, de modo a evitar injeções de depedência. Passando, como primeiro parâmetro a construção da consulta e, posteriormente, os valores a serem substituídos:
+Para consultas com condicionais, a melhor forma é utilizar o marcador `?`, de modo a evitar injeções de depedência. Passando, como primeiro parâmetro a construção da consulta e, posteriormente, os valores a serem substituídos:
 
 ```ruby
 Book.where("title = ? available = ?", params[:q], false)
 ```
 
-Também é possível utilizar `placeholders` na construção das consultas:
+Também é possível utilizar os `placeholders` na construção das consultas:
 
 ```ruby
 Book.where("title = :book_name", { book_name: params[:q] })
 ```
 
-Em situações como datas, usar intervalos (`ranges`), pode ser uma ótima opção:
+Em situações com o uso de datas, usar intervalos (`ranges`), pode ser uma ótima opção:
 
 ```ruby
 Book.where(created_at: (Time.now.midnight - 1.day.ago)..(Time.now.midnight))
@@ -115,11 +115,11 @@ Book.where("title like ?", "%#{params[:name]}%")
 
 ## Enumerações
 
-Quando criadas enumerações, o Rails, automaticamente, cria métodos adicionais que permitem validar, consultar e atualizar o valor da enumeração criada:
+Quando o model possui enumerações, o Rails automaticamente cria métodos adicionais que permitem validar, consultar e atualizar o valor da enumeração criada:
 
 ```ruby
 class Task < ApplicationRecord
-    enum status: [:todo, :doing, :done]
+  enum status: [:todo, :doing, :done]
 end
 
 # Consulta todos com o status `done`
@@ -139,17 +139,26 @@ Book.first.done!
 
 ### Operadores Lógicas
 
-- `AND` : `Book.where(title: 'The Hobbit').or(Book.where(author: tolkien))`
-- `OR` : `Book.where(title: 'The Hobbit').and(Book.where(author: tolkien))`
+- `AND` : `Book.where(title: 'The Hobbit').and(Book.where(author: tolkien))`
+- `OR` : `Book.where(title: 'The Hobbit').or(Book.where(author: tolkien))`
 - `NOT` : `Book.where(title: 'The Hobbit').or(Book.where.not(author: tolkien))`
 
 ### Agregação
 
 ```ruby
+# Retorna a quantia de ocorrências do preço
 Book.count(:price)
+
+# Retorna a média de preços
 Book.average(:price)
+
+# Retorna o menor preço
 Book.minimum(:price)
+
+# Retorna o maior preço 
 Book.maximum(:price)
+
+# Retorna a soma dos preços
 Book.sum(:price)
 ```
 
@@ -161,7 +170,7 @@ Em situações em que um conjunto grande de valores deverão ser utilizados, é 
 
 ```ruby
 Customer.find_each(start: 1, finish: 1000, batch_size: 50) do |customer|
-    NewsMailer(customer).deliver_now
+  NewsMailer(customer).deliver_now
 end
 ```
 
@@ -179,7 +188,7 @@ Para otimizar as consultas ao Banco de Dados, busque, sempre que possível, reto
 Book.where(author: tolkien).select(:title)
 ```
 
-Caso deseja retornar apenas algunas poucas colunas do Banco de Dados, utilize o método `pluck`:
+Caso deseje retornar apenas os valores de algunas poucas colunas do Banco de Dados, utilize o método `pluck`:
 
 ```ruby
 Book.pluck(:title)

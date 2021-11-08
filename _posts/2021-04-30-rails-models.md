@@ -17,11 +17,11 @@ Conforme apresentado na [Visão Geral](https://sancheslz.github.io/rails-intro),
 
 ```ruby
 class Product < ApplicationRecord
-    validates :name, presence: true
+  validates :name, presence: true
 
-    def up_name
-        self.name.upcase
-    end
+  def up_name
+    self.name.upcase
+  end
 end
 ```
 
@@ -64,13 +64,13 @@ Toda vez que uma migration é criada, o Rails gerará um arquivo com a data de g
 
 ```ruby
 class CreateProducts < ActiveRecord::Migration[6.0]
-    def change
-        create_table :products do |t|
-            t.string :name, null: false
-            t.integer :age
+  def change
+    create_table :products do |t|
+      t.string :name, null: false
+      t.integer :age
 
-            t.timestamps
-    end
+      t.timestamps
+  end
 end
 ```
 
@@ -88,7 +88,7 @@ As migrações permitem que sejam inseridas validações no Banco de Dados, pode
 - `:collation`: define o tipo de `encoding` de strings e textos
 - `:comment`: especifica um comentário para o campo
 - `:if_not_exists`: recebe um valor booleano que define que se a coluna já existe no Banco do ORM não tentará inseri-la novamente
-- `:unique`: recebe um booleano que define se campo deverá ser único da tabela do Banco de Dados
+- `:unique`: recebe um booleano que define se o campo deverá ser único da tabela do Banco de Dados
 - `:length`: recebe um inteiro que define o tamanho máximo do campo
 
 ## Associações
@@ -101,7 +101,7 @@ O `belongs_to` cria um relacionamento do tipo `book <- author`, porém não gara
 
 ```ruby
 class Book < ApplicationRecord
-    belongs_to :author
+  belongs_to :author
 end
 
 class Author < ApplicationRecord
@@ -119,7 +119,7 @@ class Book < ApplicationRecord
 end
 
 class Author < ApplicationRecord
-    has_one :book
+  has_one :book
 end
 ```
 
@@ -134,13 +134,13 @@ class Book < ApplicationRecord
 end
 
 class Author < ApplicationRecord
-    has_many :books
+  has_many :books
 end
 ```
 
 Neste exemplo, todo autor terá um ou mais livros, mas nem todo livro terá um autor.
 
-> Observe que a associação usa o plural da referência à `book`
+> **Atenção**: Observe que a associação usa o plural da referência à `book`
 
 ### has_and_belongs_to
 
@@ -148,11 +148,11 @@ O tipo de relacionamento `has_ang_belongs_to` ocorre quando na definição das a
 
 ```ruby
 class Assembly < ApplicationRecord
-    has_and_belongs_to :parts
+  has_and_belongs_to :parts
 end
 
 class Part < ApplicationRecord
-    has_and_belongs_to :assemblies
+  has_and_belongs_to :assemblies
 end
 ```
 
@@ -164,8 +164,8 @@ Observe que a definição possui o seguinte padrão:
 
 ```ruby
 class OneModel < ApplicationRecord
-    has_many :other_model_name
-    has_many :any_name, through: :other_model_name
+  has_many :other_model_name
+  has_many :any_name, through: :other_model_name
 end
 ```
 
@@ -173,32 +173,32 @@ Dessa forma, dentro do model sempre inicia-se definindo a associação com o out
 
 ```ruby
 class Patient < ApplicationRecord
-    has_many :appointments
-    has_many :physicians, through: :appointments
+  has_many :appointments
+  has_many :physicians, through: :appointments
 end
 
 class Physician < ApplicationRecord
-    has_many :appointments
-    has_many :patients, through: :appointments
+  has_many :appointments
+  has_many :patients, through: :appointments
 end
 
 class Appointment < ApplicationRecord
-    belongs_to :patient
-    belongs_to :physician
+  belongs_to :patient
+  belongs_to :physician
 end
 ```
 
 No exemplo acima, observa-se que um paciente (`patient`) pode ter um ou mais agendamentos (`appointments`). Caso o `through` não houvesse sido informado, para acessar essa associação seria necessário invocar `patient.appointments.physician.name`. Ao utilizar o `through` o nome do médico (`physician`) pode facialmente ser acessado através de `patient.pyshicians.name`.
 
-> Dica: caso não haja um nome que corresponda claramente a essa associação, uma boa prática é utilizar o padrão o nome dos models associados em ordem alfabética `FirstModelSecondModel`
+> **Dica**: caso não haja um nome que corresponda claramente a essa associação, uma boa prática é utilizar o padrão o nome dos models associados em ordem alfabética `FirstModelSecondModel`
 
 ### Opções das Associações
 
-Apesar de possuir uma configuração padrão, as associações podem receber diversos parâmetros como opçÕes, por exemplo:
+Apesar de possuir uma configuração padrão, as associações podem receber diversos parâmetros como opções, por exemplo:
 
 ```ruby
 class Book < ApplicationRecord
-    belongs_to :author, counter_cache: true
+  belongs_to :author, counter_cache: true
 end
 ```
 
@@ -206,8 +206,8 @@ Veja abaixo a lista de opções disponíveis:
 
 Parâmetro | Tipo | Descrição
 --- | --- | ---
-`:autosave` | booleano | se `true`, o Rails salvará alteração na associação entre os membros. Por padrão é falso.
-`:class_name` | string | recebe o nome da classe a ser associada, quando o nome do outro model não ser derivado para associação.
+`:autosave` | booleano | se `true`, o Rails salvará alteração na associação entre os membros. Por padrão é `false`
+`:class_name` | string | recebe o nome da classe a ser associada, quando o nome do outro model não é derivado pela associação
 `:counter_cache` | booleano | mantém em cache a quantidade (`count`) de associações entre os membros. É possível sobrescrever o nome da coluna a ser utilizada na contagem informando um symbol. Padrão de nome da coluna `<model_name>_count`.
 `:foreign_key` | string | recebe o nome que será utilizado para referenciar a chave-estrangeira. Por padrão é `<model_name>_id`
 `:primary_key` | string | recebe o campo que será utilizado como chave-primária da classe associada. Por padrão é o `id`
@@ -222,12 +222,12 @@ Várias ações ocorrem durante o ciclo de vida de um objeto, por isso, o Rails 
 
 ```ruby
 class Book < ApplicationRecord
-    before_create :to_uppercase
+  before_create :to_uppercase
 
-    private
-    def to_uppercase
-        self.name = self.capitalize
-    end
+  private
+  def to_uppercase
+    self.name = self.capitalize
+  end
 end
 ```
 
@@ -235,9 +235,9 @@ O registro do `callback` pode ser feito tanto pela passagem da função como arg
 
 ```ruby
 class Book < ApplicationRecord
-    before_create do
-        self.name = self.capitalize
-    end
+  before_create do
+    self.name = self.capitalize
+  end
 end
 ```
 
@@ -269,12 +269,12 @@ Callback | Momento
 
 ```ruby
 class Order < ApplicationRecord
-    before_update :normalize_card_number, if :paid_with_card?
+  before_update :normalize_card_number, if :paid_with_card?
 
-    private
-    def normalize_card_number
-        # ...
-    end
+  private
+  def normalize_card_number
+      # ...
+  end
 end
 ```
 
@@ -282,13 +282,13 @@ Dependendo o caso, também é possível criar a condicional à partir do objeto 
 
 ```ruby
 class Order < ApplicationRecord
-    before_update :normalize_card_number, 
-                  if: Proc.new { |order| order.paid_with_card? }
+  before_update :normalize_card_number, 
+                if: Proc.new { |order| order.paid_with_card? }
 
-    private
-    def normalize_card_number
-        # ...
-    end
+  private
+  def normalize_card_number
+      # ...
+  end
 end
 ```
 

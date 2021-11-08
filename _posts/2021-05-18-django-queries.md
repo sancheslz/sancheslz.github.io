@@ -14,11 +14,11 @@ comments: false
 
 Uma vez definido um `model`, o qual será responsável pela comunicação entre a nossa aplicação e o Banco de Dados, é preciso saber como fazer consultas aos nossos registos. Como vimos no uso do `shell`, o Django provê um `manager` chamado `objects` o qual é responsável pela abstração destas consultas.
 
-Este `manager`, proporciona diversos métodos e filtros de consulta, facilitando a tarefa de consultas aos nossos registros. Uma detalhe importante de saber sobre as queries no Django é que todas elas são `lazy`, isto é, a consulta no Banco de Dados, apenas será realizada ao término, de modo que o encadeamento e filtro da consulta pode ser feito de modo encadeado sem que isso afete a performance da aplicação.
+Este `manager`, proporciona diversos métodos e filtros de consulta, facilitando as consultas aos nossos registros. Um detalhe importante de saber sobre as queries no Django é que todas elas são `lazy`, isto é, a consulta no Banco de Dados, apenas será realizada ao término, de modo que o os filtros podem ser encadeados sem que isso afete a performance da aplicação.
 
 ## Anatomia Geral da Query
 
-Para realizar uma `query` é necessário que o `model` seja importando para o arquivo em questão. Uma vez importando, basta invocar o `manager` `objects` proporcionado pelo Django e utilizar o método escolhido passando os campos e seus respectivos valores.
+Para realizar uma `query` é necessário que o `model` seja importado para o arquivo em questão. Então, basta invocar o `manager` `objects` proporcionado pelo Django e utilizar o método escolhido passando os campos e seus respectivos valores.
 
 ```python
 # Importação dos Modelos
@@ -68,13 +68,13 @@ Book.objects.filter(
 
 ## Limitando e Ordenando o Retorno
 
-Por padrão, o retorno das `queries` no Django ocorrem de acordo com o `id` do objeto. Entretanto, é possível redefinir esta ordem tanto na construção do `model`, quanto na própria consulta, ao invocar o método `order_by`. Além disso, é possível limitar o número de itens retornados fazendo `slices` do mesmo:
+Por padrão, o retorno das `queries` no Django ocorrem de acordo com o `id` do objeto. Entretanto, é possível redefinir esta ordem tanto na construção do `model`, quanto na própria consulta, ao invocar o método `order_by`. Além disso, é possível limitar o número de itens retornados fazendo o uso de `slices`:
 
 ```python
 Book.objects.all()[0:5]
 ```
 
-> **Observação:** índices negativos não são permitidos!
+> **Atenção:** índices negativos não são permitidos!
 
 ```python
 Book.objects.filter(pub_date__gt=2010).order_by('month') 
@@ -82,7 +82,7 @@ Book.objects.filter(pub_date__gt=2010).order_by('month')
 
 ## Os Lookups dos Campos
 
-O Django proporciona diversos `lookups`, filtros de pesquisa, os quais abstraem as consultas `SQL`, de modo a retornar objetos a partir de critérios específicos de seus campos. Por exemplo, para buscar todos os itens que tenham exatamente o nome "The Hobbit", o comando `SQL` a ser utilizado seria `SELECT * FROM Book WHERE name="The Hobbit"`. Para fazer essa mesma consulta no Django, através dos seus `lookups`, basta passar o campo seguido de `__exact`: `Book.objects.filter(name__exact="The Hobbit")`.
+O Django proporciona diversos `lookups`, filtros de pesquisa, os quais abstraem as consultas `SQL`, de modo a retornar objetos a partir de critérios específicos de seus campos. Por exemplo, para buscar todos os itens que tenham exatamente o nome *"The Hobbit"*, o comando `SQL` a ser utilizado seria `SELECT * FROM Book WHERE name="The Hobbit"`. Para fazer essa mesma consulta no Django, através dos seus `lookups`, basta passar o campo seguido de `__exact`, assim: `Book.objects.filter(name__exact="The Hobbit")`. Veja a lista de `lookups` disponíveis:
 
 lookup | definição | exemplo
 --- | --- | ---
@@ -118,7 +118,7 @@ lookup | definição | exemplo
 
 ### F Expressions
 
-As expressões `F` são utilizada para realizar a `query` de um Model em comparação com seu próprio Model, por exemplo:
+As expressões `F` são utilizada para realizar a `query` de um `model` em comparação com seu próprio `model`, por exemplo:
 
 ```python
 from django.db.models import F
@@ -127,7 +127,7 @@ from django.db.models import F
 Article.objects.filter(n_stars__gt=F('n_likes'))
 ```
 
-As operações matemáticas (`+`, `-`, `*`, `/`, `%`, `**`) são permitidas na construção de F expressions.
+> As operações matemáticas (`+`, `-`, `*`, `/`, `%`, `**`) são permitidas na construção de F expressions.
 
 Por exemplo, para apresentar todos os artigos modificados após três dias da publicação
 
@@ -137,7 +137,7 @@ Article.objects.filter(updated_at__gt=F('pub_date')+timedelta(days=3))
 
 ### Q Objects
 
-Objetos `Q` são utilizados para realizar consultas múltiplas em que ao invés do "E" lógico, utiliza-se a chamada "Ou" lógico no Banco de Dados. Por exemplo, todos os artigos do Blog que começam com "In" ou "On"
+Objetos `Q` são utilizados para realizar consultas múltiplas em que se faz necessário o uso de uma validação lógica (e, ou ou não) na chamada do Banco de Dados. Por exemplo, todos os artigos do Blog que começam com "*In*" ou "*On*"
 
 ```python
 from django.db.models import Q
@@ -153,14 +153,33 @@ Os filtros do objetos `Q` podem ser combinados com os seguintes operadores:
 
 ### Agregação
 
+Os parâmetros de agregação, permitem a realização de um cálculo diretamente através da consulta:
+
 ```python
-from django.db.models import Avg # Média
-from django.db.models import Max # Máximo
-from django.db.models import Min # Mínimo
+from django.db.models import Max
 
 # Retorna os artigos com maior data de publicação
 Article.objects.aggregate(Max('pub_date'))
 ```
+
+Todos os agregadores, possuem em comum os seguintes parâmetros:
+
+- `expression`: string correspondente aos campos do `model`
+- `output_field`: representação do nome do campo no retorno da consuta
+- `filter`: um objeto opcional do tipo `Q` que é utilizado para filtrar as linhas que forem agregadas
+- `**extras`: palavras-chave que fornecem um contexto extra para o SQL gerado pela agregação
+
+Os agregadores podem ser:
+
+agregador | definição | argumento opcional | nome saida | tipo saida
+--- | --- | --- | --- | ---
+`Avg`| retorna o valor médio de uma dada expressão | `distinct` padrão `False` | `<field>__avg` | `float` se to tipo `int` ou similar ao tipo do campo
+`Count`| retorna o número de objetos que correspondem a expressão | `distinct` padrão `False` | `<field>__count` | `int`
+`Max`| retorna o valor máximo correspondente a expressão |  | `<field>__max` | similar ao tipo do campo
+`Min`| retorna o valor mínimo correspondente a expressão |  | `<field>__min` | similar ao tipo do campo
+`StdDev`| retorna o valor desvio-padrão correspondente a expressão | `sample` padrão `False` | `<field>__stddev` | `float` se to tipo `int` ou similar ao tipo do campo
+`Sum`| retorna o a soma dos valores correspondentes a expressão | `distinct` padrão `False` | `<field>__sum` | similar ao tipo do campo
+`Variance`| retorna a variância correspondente a expressão | `sample` padrão `False` | `<field>__variance` | `float` se to tipo `int` ou similar ao tipo do campo
 
 ### Anotação
 
@@ -170,21 +189,27 @@ Retorna um valor pré-definido para cada item da *query*
 from django.db.models import Count
 
 q = Book.objects.annotate(n_authors = Count('author'))
-q[0].n_authros # 2
+q[0].n_authors
+# >>> 2
 ```
 
-Note que quando usamos o *annotate*, o parâmetro passado, retorna como campo a ser consultado na `query`.
+> Note que quando usamos o *annotate*, o parâmetro passado, retorna como campo a ser consultado na `query`.
 
 ## Boas Práticas
 
 ### Cache
 
-O primeiro ponto a entender sobre o Django é que suas consultas são `lazy`, isso significa que a consulta só é executada quando se tenta extrair alguma informação da consulta. Além disso, ela é mantida em `cache`, de forma que novas consultas no valor em `cache` não farão novas consultas no Banco de Dados:
+O primeiro ponto a entender sobre o Django é que suas consultas são `lazy`, isso significa que a consulta só é executada quando se tenta extrair alguma informação da consulta. Além disso, ela é mantida em `cache`, de forma que novas consultas no valor em `cache` não resultarão novas consultas no Banco de Dados:
 
 ```python
-books = Book.objects.get(id=1) # Gera a query mas não executa a consulta
-book.title # Executa a consulta e mantém em cache
-book.author # Consulta o valor em cache e não refaz a consulta no Banco de Dados
+# Gera a query mas não executa a consulta
+books = Book.objects.get(id=1)
+
+# Executa a consulta e mantém em cache
+book.title
+
+# Consulta o valor em cache e não refaz a consulta no Banco de Dados
+book.author
 ```
 
 ### Valores únicos
@@ -234,9 +259,9 @@ Caso seja necessário, é possível realizar a `query` com comandos SQL através
 Book.objects.raw('SELECT * FROM book_book')
 ```
 
-Vale lembrar que a tabela, por padrão do Django possui o nome composto por: `appname_modelname`
+Vale lembrar que a tabela, por padrão do Django possui o nome composto por: `<app_name>_<model_name>`
 
-> **Obs.** apesar da possibilidade, o uso desse recurso é desencorajado pela documentação por proporcionar riscos a segurança do sistema.
+> **Atenção** apesar da possibilidade, o uso desse recurso é desencorajado pela documentação por proporcionar riscos a segurança ao sistema.
 
 ## Referências
 

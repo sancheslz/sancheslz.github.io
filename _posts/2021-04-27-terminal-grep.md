@@ -14,7 +14,7 @@ Iniciado em 1973, o grep - acrônimo de _Global Regular-Expression Print_ - é u
 
 Funciona assim: o usuário faz a busca usando o `grep` e informando um padrão de busca. O `grep` analisará o arquivo verificando todas as ocorrências do padrão informado. Encontradas as ocorrências, as mesmas serão devolvidas ao usuário.
 
-Com isso, coisas como encontrar arquivos com marcadores como `FIXME` e `TODO` ou verificar quais arquivos importam uma determinada biblioteca que será descontinuada se torna uma coisa simples.
+Com isso, coisas como encontrar arquivos com marcadores como `FIXME` e `TODO` ou verificar quais arquivos importam uma determinada biblioteca que será descontinuada se torna uma tarefa simples.
 
 ## Visão Geral
 
@@ -24,7 +24,7 @@ grep [options] [regex] [filename]
 
 O comando `grep` pode ser subdividido em três categorias de parâmetros:
 
-- `options`: as opções de busca e de execução, também chamados de `flags``
+- `options`: as opções de busca e de execução, também chamados de `flags`
 - `regex`: a expressão ou padrão a ser buscado
 - `filename`: nome do arquivo ou conjunto de arquivos em que a busca deverá ocorrer
 
@@ -44,16 +44,16 @@ grep -E "FIXME|HACK|TODO" -r .
 ```
 ### Informando o Padrão
 
-No que no exemplo acima, o padrão a ser encontrado foi passado entre aspas. Os padrões podem ser passados de quatro formas e combinados entre eles:
+Note que no exemplo acima, o padrão a ser encontrado foi passado entre aspas. Os padrões podem ser passados de quatro formas e combinados entre eles:
 
 - `grep pattern`: utilizado para buscas de padrões simples de texto, sem espaço entre eles
-- `grep 'patter'`: utilizado para busca de padrões complexos, como expressões regulares, textos com espaços, etc.
+- `grep 'pattern'`: utilizado para busca de padrões complexos, como expressões regulares, textos com espaços, etc.
 - `grep "$env"`: utilizado para buscar a partir do resultado de uma variável de ambiente, por exemplo: `$HOME`
 - ```grep `cmd` ```: utilizado para buscar a partir de um comando passado, por exemplo `whoami`
 
 ## Metacaracteres e definições POSIX
 
-Elaborar expressões regulares, significa definir e identificar padrões que podem aparecer em nosso texto. Por exemplo, um CEP pode ser definido como um conjunto de 5 digitos, um traço e mais 3 dígitos. Com essa definição, entrar todos os CEPs em um arquivo se torna uma tarafa fácil. Essa abstração de "qualquer caracter" ou conjunto de caracteres é o que chamamos de _metacaracter_. 
+Elaborar expressões regulares, significa definir e identificar padrões que podem aparecer em nosso texto. Por exemplo, um CEP pode ser definido como um conjunto de 5 digitos, um traço e mais 3 dígitos. Com essa definição, encontrar todos os CEPs em um arquivo se torna uma tarafa fácil. Essa abstração de "qualquer caracter" ou conjunto de caracteres é o que chamamos de _metacaracter_. 
 
 Metacaracter | Combinação
 --- | ---
@@ -98,7 +98,7 @@ Definição POSIX | Definição
 ## Grupo GREP
 
 - `grep -f file_with_patterns file_name`: permite que seja informado um arquivo em que cada linha do arquivo corresponde a um padrão a ser encontrado
-- `grep -i pattern file_name`: realiza a busca dos padrões informados de como _case-insensitive_, isto é, não diferenciando maiúsculas e minúsculas
+- `grep -i pattern file_name`: realiza a busca dos padrões informados de modo _case-insensitive_, isto é, não diferenciando maiúsculas e minúsculas
 - `grep -v pattern file_name`: inverte a busca, de forma que será retornado qualquer valor que não combine com o padrão informado
 - `grep -w pattern file_name`: retorna apenas os casos em que o padrão buscado corresponda completamente à uma palavra
 - `grep -x pattern file_name`: retorna se o padrão buscado corresponde à uma linha do arquivo buscado
@@ -107,7 +107,7 @@ Definição POSIX | Definição
 - `grep -l pattern file_name`: retorna os arquivos com resultados encontrados
 - `grep -L pattern file_name`: retorna os arquivos com resultados encontrados
 - `grep -o pattern file_name`: retorna apenas a ocorrência e não a linha inteira
-- `grep -m limit_number pattern file_name`: limita o número de ocorrências a antes de retornar, utilizado, principalmente em arquivos extensos para limitar a busca à `limit_number` ocorrências
+- `grep -m limit_number pattern file_name`: limita o número de ocorrências antes de retornar, utilizado, principalmente em arquivos extensos para limitar a busca à `limit_number` ocorrências
 - `grep -h pattern file_name`: retorna as buscas sem exibir o nome do arquivo
 - `grep -H pattern file_name`: retorna as buscas exibindo o nome do arquivo
 - `grep -n pattern file_name`: retorna o número da linha em que houve a ocorrência

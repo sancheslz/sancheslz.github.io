@@ -27,9 +27,13 @@ Uma vez instalado o framework, o próximo passo é fazer a instalação dos `hoo
 pre-commit install
 ```
 
-> **Atenção**: para executar este comando é necessário que o repositório Git já tenha sido iniciado
+> **Atenção**: para executar este comando é necessário que o repositório Git já tenha sido iniciado!
 
-Uma vez feita essa configuração, basta criar o arquivo de configurações na raiz do projeto com o seguinte nome: `.pre-commit-config.yaml`. O framework fornece um arquivo de exemplo, bastando para isso executar o comando: `pre-commit sample-config > .pre-commit-config.yaml`. Feito isos, deve-se fazer a verificação dos arquivos já existentes no projeto, através do comando:
+Uma vez feita esta configuração, basta criar o arquivo `.pre-commit-config.yaml` na raiz do projeto. 
+
+> O framework fornece um arquivo de exemplo, bastando para isso executar o comando: `pre-commit sample-config > .pre-commit-config.yaml`.
+
+Uma vez criado o arquivo de configuração, deve-se fazer a verificação dos arquivos existentes no projeto, através do comando:
 
 ```
 pre-commit run --all-files
@@ -39,14 +43,15 @@ pre-commit run --all-files
 
 ```yaml
 # .pre-commit-config.yaml
+# ---
 
 # Configurações Gerais
 default_stages:
-    - commit
-    - push
+  - commit
+  - push
 
 default_language_version:
-    python: python3.8
+  python: python3.8
 
 files: '.*\.py$'
 exclude: '^tests*py$'
@@ -54,64 +59,70 @@ fail_fast: true
 
 repos:
     # Configurações Específicas
--   repo: git@github.com:PyCQA/flake8.git
+  - repo: git@github.com:PyCQA/flake8.git
     rev: v3.9.2
     hooks:
-    -   id: flake8
-        name: Padrão PEP8
-        alias: pep8
-        language_version: 3.8
-        files: ''
-        exclude: '^$'
-        types: [python]
-        types_or: [python]
-        exclude_types: [text]
-        args: [-v, --max-line-length=80]
-        stages: [commit, push, merge]
-        always_run: false
-        verbose: true
-        log_file: 'flake_erros.log'
+    - id: flake8
+      name: Padrão PEP8
+      alias: pep8
+      language_version: 3.8
+      files: ''
+      exclude: '^$'
+      types: [python]
+      types_or: [python]
+      exclude_types: [text]
+      args: [-v, --max-line-length=80]
+      stages: [commit, push, merge]
+      always_run: false
+      verbose: true
+      log_file: 'flake_erros.log'
 ```
 
 ## Configuração 
 
+A Configuração Geral, será aplicada para todos os `hooks` definidos, entretanto, caso o `hook` tenha uma especiicação diferente, a configuração específica prevalecerá.
+
 ### Geral
 
-A Configuração Geral, será aplicada para todos os `hooks` definidos, entretanto, caso o `hook` tenha uma especiicação diferente, a configuração específica prevalecerá.
+Parâmetros possíveis na **Configuração Geral**: 
 
 parâmetro | definição | observação
 --- | --- | ---
 `default_stages` | momento em que o hook será ativado | *default*: todos os stages
 `default_language_version` | linguages e suas respectivas versões | `-`
-`files` | padrão de arquivos a serem incluídos na análise | *default*: `''`, regex
-`exclude` | padrão de arquivos a serem excluídos da análise | *default* `'^$'`, regex
+`files` | regex com o padrão de arquivos a serem incluídos na análise | *default*: `''`
+`exclude` | regex com padrão de arquivos a serem excluídos da análise | *default* `'^$'`
 `fail_fast` | encerra a execução ao primeiro erro | *default* `false`
 
 ### Específica
 
+Parâmetros possíveis na **Configuração Específica**: 
+
 parâmetro | definição | observação
 --- | --- | ---
-`repo` | endereço fonte do `git clone` | caso seja um item local, utilize `local`
+`repo` | endereço fonte usado pelo `git clone` | caso seja um item local, utilize `local`
 `rev` | versão a ser utilizada | se `local` não utilizar
 `hooks` | lista de definições do `hook` | `-`
 
 ### Hooks
 
+Cada `hook` utilizado na configuração específica pode ter algum dos seguintes parâmetros:
+
 parâmetro | definição | observação
 --- | --- | ---
 `id` | `hook` a ser utilizado | **obrigatório**
-`name` | nome exibido duranta a execução | 
+`name` | nome exibido durante a execução | 
 `alias` | apelido para o `hook` | exemplo de uso: `pre-commit run pep8`
 `language_version` | versão utilizada da linguagem | `-`
-`files` | padrão de arquivos a serem incluídos na análise | *default*: `''`
-`exclude` | padrão de arquivos a serem excluidos na análise | *default* `'^$'`
+`files` | regex com o padrão de arquivos a serem incluídos na análise | *default*: `''`
+`exclude` | regex com o padrão de arquivos a serem excluidos na análise | *default* `'^$'`
 `types` | tipos de arquivos analisados | executa como `AND`
 `types_or` | tipos de arquivos analisados | executa como `OR`
 `exclude_types` | tipo de arquivo à excluir da análise | `-`
 `args` | lista de argumentos passados na execução | `-`
 `stages` | momento em que o hook será ativado | *default*: todos os stages
 `always_run` | se definido, executará mesmo que não tenha nenhum arquivo correspondente | *default*: `false`
-`verbose` | exibe todas as mensagens de execução | *default*: `false`
+`verbose` | exibe todos os logs de execução | *default*: `false`
 `log_file` | nome do arquivo de logs | string
 
 ### Stages
@@ -155,13 +166,17 @@ Também é possível criar `hooks` personalizados, para isso, é necessário cri
 
 ```yaml
 # pre-commit-hooks.yaml
+# ---
+
 - id: unittest
   name: Run Python Tests
   description: Run Python tests using Unittest
-  entry: pythom -m unittest
+  entry: python -m unittest
   language: system
   stages: [commit]
 ```
+
+Na criação de `hooks` personalizados e/ou locais, pode-se usar os seguintes parâmetros:
 
 parâmetro | definição | observação
 --- | --- | ---
@@ -169,13 +184,13 @@ parâmetro | definição | observação
 `name` | nome exibido duranta a execução | 
 `entry` | comando a ser executado | exemplo: `flake8 -v`
 `language` | linguagem usada pelo `hook`
-`files` | padrão de arquivos a serem incluídos na análise | *default*: `''`
-`exclude` | padrão de arquivos a serem excluidos na análise | *default* `'^$'`
+`files` | regex com o padrão de arquivos a serem incluídos na análise | *default*: `''`
+`exclude` | regex com o padrão de arquivos a serem excluidos na análise | *default* `'^$'`
 `types` | tipos de arquivos analisados | executa como `AND`
 `types_or` | tipos de arquivos analisados | executa como `OR`
 `exclude_types` | tipo de arquivo à excluir da análise | `-`
 `always_run` | se definido, executará mesmo que não tenha nenhum arquivo correspondente | *default*: `false`
-`verbose` | exibe todas as mensagens de execução | *default*: `false`
+`verbose` | exibe todos os logs de execução | *default*: `false`
 `pass_files` | se `false` os nomes dos arquivos não serão passados para o `hook` | *default* : `true`
 `require_serial` | se `true` os `hooks` serão executados em processos únicos e não em paralelo | *default* : `false`
 `description` | descrição usada pelo `hook` | *default*: `''`
@@ -184,40 +199,43 @@ parâmetro | definição | observação
 `args` | lista de argumentos opcionais passado ao `hook` | *default*: `[]`
 `stages` | momento em que o hook será ativado | *default*: todos os stages
 
-Todo arquivo de `hook` tem que estar em um diretório/repositório que seja passível de responder ao `git clone`. Neste exemplo, este `hook`, poderia ser invocado no arquivo de configuração, da seguinte forma:
+Todo arquivo de `hook` tem que estar em um diretório/repositório que seja passível de responder ao comando `git clone`. Neste exemplo, este `hook`, poderia ser invocado no arquivo de configuração, da seguinte forma:
 
 ```yaml
 # .pre-commit-config.yaml
+# ---
 
 # Configurações Gerais
 # ...
 
 repos:
-    # Configurações Específicas
--   repo: https://github.com/spam/spam
-    rev: 0.1.0
-    hooks:
-    -   id: unittest
+  # Configurações Específicas
+- repo: https://github.com/username/project_name
+  rev: 0.1.0
+  hooks:
+  - id: unittest
 ```
 
 > `rev` refere-se a versão utilizada, podendo ser um `label` uma `release` ou até mesmo o `hash` do commite da versão desejada.
 
 ### Hooks Locais
 
-Também é possível criar e utilizar `hooks` locais, isto é, que utilizam as configurações e dependências do projeto para executar as tarefas/funções. Ele deve possuir como `repo` o valor `local` e definir: `id`, `name`, `language`, `entry`, e `files` / `types`.
+Também é possível criar e utilizar `hooks` locais, isto é, que utilizam as configurações e dependências do projeto para executar as tarefas/funções. Ele deve possuir como `repo` o valor `local` e definir obrigatoriamente: `id`, `name`, `language`, `entry`, e `files` / `types`.
 
-Here's an example configuration with a few local hooks:
+
 ```yaml
--   repo: local
-    hooks:
-    -   id: pylint
-        name: pylint
-        entry: pylint
-        language: system
-        types: [python]
+- repo: local
+  hooks:
+  - id: pylint
+    name: pylint
+    entry: pylint
+    language: system
+    types: [python]
 ```
 
 ### CLI
+
+O `pre-commit` possui diversos comandos úteis em sua Interface de Linha de Comando (CLI)
 
 - `pre-commit install`: instala as dependência no diretório do `git`
 - `pre-commit autoupdate`: atualiza os hooks listados
@@ -231,7 +249,6 @@ Here's an example configuration with a few local hooks:
 - `pre-commit uninstall`: desinstala as dependência no diretório do `git`
 - `SKIP=first,second git commit -m "spam"`: pula os `hooks` especificado ao fazer o commit
 - `git commit -m "foo" --no-verify`: não executa nenhuma verificação
-
 
 ### Badge
 

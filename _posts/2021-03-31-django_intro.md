@@ -13,7 +13,7 @@ comments: false
 
 ![Logotipo do Django](../assets/img/django.jpg)
 
-Lançado em 2005, o Django é um framework de padrão MVT (_Model-View-Template_), escrito em Python e de licença BSD, que enfatiza o rápido desenvolvimento, usando-se ao máximo do princípio DRY (_Don't Repeat Yourself_).
+Lançado em 2005, o Django é um framework de padrão MVT (_Model-View-Template_), escrito em Python e de licença BSD, que enfatiza o rápido desenvolvimento, usando ao máximo do princípio DRY (_Don't Repeat Yourself_).
 
 O Django tem como principais características:
 
@@ -31,7 +31,7 @@ O Django tem como principais características:
 
 A imagem acima, não pretende ser detalhista ou precisa sobre os detalhes do Django, mas sim, mostrar a visão geral da arquitetura do framework e como cada elemento se relaciona.
 
-- **01**: O Cliente acessa o URL do site através do seu navegador;
+- **01**: O Cliente acessa a URL do site através do seu navegador;
 - **02**: Essa requisição chega ao servidor que passa a URL para `urls.py`. Nele, será identificado se há alguma `view` que lide com essa URL;
 - **03**: Identificada a `view`, o mesmo chamará o `model` correspondente em busca das informações necessárias para completar a sua resposta;
 - **04**: O `model` fará a consulta ao Banco de Dados;
@@ -42,15 +42,19 @@ A imagem acima, não pretende ser detalhista ou precisa sobre os detalhes do Dja
 
 ## Iniciando um Projeto
 
+Para instalar o Django, basta ativar o ambiente virtual e instalar a biblioteca através do `pip`, com o seguinte comando: `pip install django`.
+
 Ao instalar o Django, você terá disponível o [django-admin](https://docs.djangoproject.com/en/3.1/ref/django-admin/). Com ele, é possível executar comandos no terminal passando os parâmetros necessários. Para criar um projeto, por exemplo, basta digitar:
 
 ```bash
 django-admin startproject <project_name> <directory>
 ```
 
+> O `<directory>` é um parâmetro opcional, caso não seja definido, o `django-admin` criará uma pasta com o mesmo nome do `<project_name>`.
+
 ## Entendendo as Pastas
 
-Ao criar um projeto Django, o django-admin fará a estruturação de diversos arquivos, de acordo com a arquitetura do framework, com destaque para os seguintes arquivos e diretórios:
+Ao criar um projeto Django, o `django-admin` fará a estruturação de diversos arquivos, de acordo com a arquitetura do framework, com destaque para os seguintes arquivos e diretórios:
 
 ```bash
 root
@@ -72,7 +76,7 @@ Abaixo uma breve descrição de cada arquivo/diretório:
 - `myproject/asgi.py`: interface entre o servidor web e a aplicação (assíncrona)
 - `myproject/settings.py`: arquivo de configurações do projeto
 - `myproject/urls.py`: arquivo de definição das urls do projeto
-- `myproject/wsgi.py`: interface entre o servidor web e a aplicação
+- `myproject/wsgi.py`: interface entre o servidor web e a aplicação (síncrona)
 
 ---
 
@@ -80,9 +84,9 @@ Abaixo uma breve descrição de cada arquivo/diretório:
 
 ### Rodando o Projeto
 
-Para testar o seu projeto Django, se está funcionando e se está corretamente configurado, podemos rodá-lo usando o comando:
+Para testar se o seu projeto Django está funcionando e se está corretamente configurado, execute-o com o seguinte comando:
 
-```bash
+```console
 manage.py runserver
 ```
 
@@ -90,9 +94,9 @@ Abra o navegador em `localhost:8000` e você deverá ver a mensagem de boas-vind
 
 ### Criando um App
 
-Vamos começar criando um app que responderá pela _home page_, para isso, basta executarmos o seguinte comando no Terminal passando `home` como nome do app:
+Vamos começar criando um app que responderá pela _home page_, para isso, basta executar o seguinte comando no Terminal passando `home` como nome do app:
 
-```bash
+```console
 django-admin startapp <my_app>
 ```
 
@@ -102,7 +106,7 @@ Com isso o Django criará os seguintes arquivos:
 root
 │
 ├─ manage.py
-├─ myproject.py
+├─ myproject/
 │
 └─ home/
    ├─ __init__.py
@@ -114,20 +118,22 @@ root
    └─ views.py
 ```
 
-Sendo a função de cada um dos respectivos arquivos/diretórios:
+Sendo a função de cada um dos respectivos arquivos/diretórios criados:
 
 - `__init__.py`: define o diretório como um módulo Python
-- `admin.py`: responsável pela criação desse app na área administrativa
+- `admin.py`: responsável pelas configurações do app na área administrativa
 - `apps.py`: responsável pelas configurações do app
 - `migrations/`: responsável por gerenciar as modificações do model no Banco de Dados
 - `models.py`: responsável pela criação dos modelos e sua vinculação com o Banco de Dados
 - `tests.py`: responsável pela criação de testes
-- `views.py`: responsável pela recebimento e resposta das requisições (controller)
+- `views.py`: responsável pela recebimento e resposta das requisições (`controller`)
 
 Uma vez criada a aplicação, o próximo passo é adicioná-la a lista de aplicações do Django. Para isso, abra o arquivo `myproject/settings.py` e adicione o nome do app:
 
 ```python
 # myproject/settings.py
+# ---
+
 INSTALLED_APPS = [
     # ...
     'django.contrib.staticfiles',
@@ -135,32 +141,41 @@ INSTALLED_APPS = [
 ]
 ```
 
-### Adiiconando uma View
+### Adicionando uma View
 
 Abra no diretório do app o arquivo `myproject/home/views.py` e crie a seguinte função:
 
 ```python
+# myproject/home/views.py
+# ---
+
 from django.shortcuts import render
 
 def index(request):
     return render(request, 'home/index.html')
 ```
 
-O arquivo começa com a importação de uma função do Django (`render`) que é responsável pela renderização dos templates. Em seguida, cria-se uma função que recebe a requisição do usuário e faz responde a requisição se utilizando de um template especificado.
+O arquivo começa com a importação da função `render` do Django que é responsável pela renderização dos templates. Em seguida, cria-se uma função que recebe a requisição do usuário e responde a mesma através do template especificado.
 
 ### Criando o Template
 
 Para criar um template, basta criar o diretório: `home/templates/home` e dentro dele criar o arquivo `index.html` com o seguinte conteúdo:
 
 ```html
+<!-- # myproject/home/templates/home/index.html -->
+<!-- #--- -->
+
 <h1>Olá mundo</h1>
 ```
 
 > Observe que o padrão `<app>/templates/<app>` é adotado pelo Django uma vez que ele buscará pelo template em todas as pastas `templates` do projeto
 
-Além do conteúdo HTML o Django incorpora a linguagem de template do [Jinja](https://jinja.palletsprojects.com/en/2.11.x/) permitindo expressões e variáveis sejam executadas de forma semelhante ao adotado pelo Python e pelo Django:
+Além do conteúdo HTML o Django incorpora sua linguagem de Template, semelhante ao [Jinja](https://jinja.palletsprojects.com/en/2.11.x/), permitindo o uso de expressões e variáveis de forma semelhante ao adotado pelo Python e pelo Django:
 
 ```html
+<!-- # myproject/home/templates/home/index.html -->
+<!-- #--- -->
+
 <h1>Olá mundo</h1>
 {# Comentário do Código #}
 {% raw %}{% with total=1 %}
@@ -168,11 +183,11 @@ Além do conteúdo HTML o Django incorpora a linguagem de template do [Jinja](ht
 {% endwith %}
 {% endraw %}
 ```
-Note que o código Jinja é passado através de um conjunto chaves (`{ }`), sendo que há três formatos:
+Note que na linguagem de template do Django, o código é passado através de um conjunto chaves (`{ }`), sendo que há três formas de uso:
 
+- `{% raw %}{# #}{% endraw %}`: cria comentário no código HTML
 - `{% raw %}{% %}{% endraw %}`: cria blocos de execução de código, mas não os exibe na tela
 - `{% raw %}{{ }}{% endraw %}`: exibe as variáveis e valores na tela
-- `{% raw %}{# #}{% endraw %}`: cria comentário no código HTML
 
 Ao executar o servidor, será possível ver o comportamento-base de uma aplicação Django. =)
 
