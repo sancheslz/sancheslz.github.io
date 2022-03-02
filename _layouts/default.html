@@ -6,7 +6,9 @@
   <body>
 
     {%- include header.html -%}
-
+    {%- if jekyll.environment == 'production' -%}
+      {%- include tag-manager-body.html -%}
+    {%- endif -%}
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
         {{ content }}
