@@ -337,7 +337,7 @@
     flex: 2;
 
     .image {
-      background-image: url('../../assets/img/profile.jpg');
+      background-image: url('https://avatars.githubusercontent.com/u/45540147');
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
@@ -459,6 +459,21 @@
   background-color: #CC0000;
   -webkit-mask-image: url('../assets/icons/rubyonrails.svg');
   mask-image: url('../assets/icons/rubyonrails.svg');
+}
+.vue {
+  background-color: #4FC08D;
+  -webkit-mask-image: url('../assets/icons/vue.svg');
+  mask-image: url('../assets/icons/vue.svg');
+}
+.pandas {
+  background-color: #150458;
+  -webkit-mask-image: url('../assets/icons/pandas.svg');
+  mask-image: url('../assets/icons/pandas.svg');
+}
+.typescript {
+  background-color: #3178C6;
+  -webkit-mask-image: url('../assets/icons/typescript.svg');
+  mask-image: url('../assets/icons/typescript.svg');
 }
 
 .cheatsheet {
