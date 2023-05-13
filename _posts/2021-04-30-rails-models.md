@@ -9,6 +9,8 @@ category: "Rails"
 comments: false
 ---
 
+![Logotipo do Rails](../assets/posts/rails_models.png)
+
 ## Models no Rails
 
 Conforme apresentado na [Visão Geral](https://sancheslz.github.io/rails-intro), todas as requisições do Cliente serão tratadas pelo gerenciador de rotas do Rails que fará o redirecionamento para os controllers os quais, conforme suas instruções farão consultas aos models. A criação de models no Rails ocorrerem de forma simple e rápida, graças à seu ORM e as convenções adotadas pelo `ActiveRecord`.

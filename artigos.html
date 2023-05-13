@@ -6,20 +6,23 @@ comments: false
 order: 3
 ---
 
-{% assign PostByCategory = site.posts | where: "tag", "tutorial" | sort: date | group_by: "category" %}
+{% assign PostByCategory = site.posts | sort: date | group_by: "category" %}
+{% assign PostByCategory = PostByCategory | sort: "name" %}
 
 <div class="books">
     {% for post in PostByCategory %}
-    <div class="book">
-        <img src="assets/img/{{ post.name | downcase | slugify }}.jpg" alt="{{ post.name }}" class='img_center' height="200px">
-        <span class="book-title">{{ post.name | upcase }}</span>
-        <ol>
-            {% assign postOrdered = post.items | sort: "order" %}
-            {% for item in postOrdered %}
-                <li><a href="{{item.url}}"> {{ item.title }} </a></li>
-            {% endfor %}
-        </ol>
-        <br>
+    <div class="book d-flex">
+        <img src="assets/img/{{ post.name | downcase | slugify }}.jpg" alt="{{ post.name }}" class='' height="200px">
+        <div>
+            <span class="book-title">{{ post.name | upcase }}</span>
+            <ol>
+                {% assign postOrdered = post.items | sort: "order" %}
+                {% for item in postOrdered %}
+                    <li><a href="{{item.url}}">{{ loopfor.index }} {{ item.title }} </a></li>
+                {% endfor %}
+            </ol>
+            <br>
+        </div>
     </div>
     {% endfor %}
 </div>

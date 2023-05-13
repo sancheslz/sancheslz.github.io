@@ -9,6 +9,8 @@ category: "Rails"
 comments: false
 ---
 
+![Logotipo do Rails](../assets/posts/rails_console.png)
+
 ## O que é o Console
 
 Uma vez definido o modelo (`model`) responsável pelo registro e controle de informações em nosso Banco de Dados, um passo muito comum é testar o modelo construído e seu comportamento. Esse teste pode ser feito de forma automatizada ou através da interface que criamos para nossa aplicação. Entretanto, para testes rápidos e exploratórios, é comum a utilização do `console`.

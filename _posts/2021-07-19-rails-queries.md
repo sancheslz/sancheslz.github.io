@@ -9,6 +9,8 @@ category: "Rails"
 comments: false
 ---
 
+![Logotipo do Rails](../assets/posts/rails_queries.png)
+
 ## Queries no Rails
 
 Uma vez definido um `model`, o qual será responsável pela comunicação entre a nossa aplicação e o Banco de Dados, é preciso saber como fazer consultas aos nossos registos. Como vimos no uso do `console`, o Rails provê um conjunto de métodos que facilitam a realização de consultas dos nossos registros, graças ao `ActiveRecord`.

@@ -9,6 +9,8 @@ category: "Rails"
 comments: false
 ---
 
+![Logotipo do Rails](../assets/posts/rails_urls.png)
+
 ## Rotas no Rails
 
 Conforme apresentado na [Visão Geral](https://sancheslz.github.io/rails-intro) do Rails, todas as requisições feitas pelo cliente passam inicialmente pelo arquivo de rotas, o `config/routes.rb` que herda suas funcionalidades do framework Rails `Router`. Por isso, definir rotas no Rails é uma tarefa extremamente simples e eficiente.

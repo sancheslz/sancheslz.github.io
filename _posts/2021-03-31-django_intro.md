@@ -11,7 +11,7 @@ comments: false
 
 ## O que é Django
 
-![Logotipo do Django](../assets/img/django.jpg)
+![Logotipo do Django](../assets/img/django_old.jpg)
 
 Lançado em 2005, o Django é um framework de padrão MVT (_Model-View-Template_), escrito em Python e de licença BSD, que enfatiza o rápido desenvolvimento, usando ao máximo do princípio DRY (_Don't Repeat Yourself_).
 
@@ -27,7 +27,7 @@ O Django tem como principais características:
 
 ## Visão Geral
 
-![Visão Geral do Rails](../assets/img/django_architecture.jpg)
+![Visão Geral do Django](../assets/posts/django_architecture.jpg)
 
 A imagem acima, não pretende ser detalhista ou precisa sobre os detalhes do Django, mas sim, mostrar a visão geral da arquitetura do framework e como cada elemento se relaciona.
 

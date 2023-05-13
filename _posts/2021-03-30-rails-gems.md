@@ -9,6 +9,8 @@ category: "Rails"
 comments: false
 ---
 
+![Logotipo do Rails](../assets/posts/rails_gems.png)
+
 ## O que é uma Gem?
 
 Gem é o nome dado a um pacote ou biblioteca da linguagem Ruby. O próprio Rails é um Gem da linguagem Ruby. Outras gems podem ser encontradas no website [RubyGems](https://rubygems.org). Para garantir a qualidade e uso de uma Gem, visite o [RubyToolBox](https://www.ruby-toolbox.com).

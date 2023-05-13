@@ -1,36 +1,24 @@
 title: Sanches
 # email: your-email@example.com
-description: >- # this means to ignore newlines until "baseurl:"
+description: >-
   "A simplicidade é o último grau de sofisticação" Leonardo da Vinci
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-github_username:  sancheslz
-linkedin_username: sancheslucas
-google_analytics: UA-177397165-1
-# Disqus Comments
-disqus:
-    # Leave shortname blank to disable comments site-wide.
-    # Disable comments for any post by adding `comments: false` to that post's YAML Front Matter.
-    shortname: sancheslz
 
 url: https://sancheslz.github.io
+baseurl: "" # the subpath of your site, e.g. /blog
+github_username:  sancheslz
+linkedin_username: sancheslucas
+twitter_username: sanches_lz
+
+google_analytics: UA-177397165-1
+google_tag_manager: GTM-MRF2CB2
+
+disqus:
+  shortname: sancheslz
+
 
 permalink: /:slug
 
-# Build settings
 markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
-
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
