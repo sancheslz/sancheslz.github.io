@@ -1,14 +1,14 @@
 ---
 layout: post
 date: 2023-05-13 00:00:00 -0300
-title: "Email Marketing: Introdução"
-slug: email-marketing-introducao
+title: "Introdução"
+slug: introducao
 tag:
   - emkt
   - marketing
   - comunicação
 order: 1
-category: "Comunicação"
+category: "Email Marketing"
 comments: false
 ---
 

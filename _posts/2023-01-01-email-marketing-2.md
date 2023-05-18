@@ -1,14 +1,14 @@
 ---
 layout: post
 date: 2023-05-13 00:00:00 -0300
-title: "Email Marketing: Conteúdo"
-slug: email-marketing-conteudo
+title: "Conteúdo"
+slug: conteudo
 tag:
   - emkt
   - marketing
   - comunicação
 order: 2
-category: "Comunicação"
+category: "Email Marketing"
 comments: false
 ---
 
