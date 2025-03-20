@@ -11,7 +11,7 @@
       href="https://www.flickr.com/photos/{{ site.flickr_username| cgi_escape | escape }}"><svg class="svg-icon">
         <use xlink:href="{{ '/assets/minima-social-icons.svg#flickr' | relative_url }}"></use>
       </svg></a></li>{%- endif -%}
-  {%- if site.github_username -%}<li><a target="_blank"
+  {%- if site.github_username -%}<li><a target="_blank" onclick="dataLayer.push({'event': 'github_click'})"
       href="https://github.com/{{ site.github_username| cgi_escape | escape }}"><svg class="svg-icon">
         <use xlink:href="{{ '/assets/minima-social-icons.svg#github' | relative_url }}"></use>
       </svg></a></li>{%- endif -%}
